@@ -1,0 +1,8 @@
+pandas>=2.0
+matplotlib>=3.8
+seaborn>=0.13
+numpy>=1.26
+scipy>=1.12
+pymannkendall>=1.4
+google-genai>=1.0         # required for llm_judge_eval.py (Gemini 2.5 Pro)
+python-dotenv>=1.0        # loads GEMINI_API_KEY from project .env

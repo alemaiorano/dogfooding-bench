@@ -1,0 +1,10 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper proposed and evaluated an automated self-testing framework as a release-readiness quality gate for complex multi-agent LLM systems. Directly addressing the release-readiness question introduced in Section~\ref{sec:introduction}, the core contribution is not only an evaluation suite, but a deterministic decision protocol (PROMOTE/HOLD/ROLLBACK) grounded in five operationalized dimensions and integrated into CI/CD.
+
+The case study results show that this gate structure can detect severe behavioral regressions early while sustaining release velocity under a continuously evolving question bank. Evidence Coverage emerged as the primary severe-regression discriminator, and the consolidated five-dimension design reduced redundant signal between legacy success/helpfulness constructs. Together, these findings support the use of multidimensional structural gates as a complement to conventional unit/integration testing.
+
+For practitioners, the key implication is that release governance for LLM applications should combine content-level assessment with structural runtime signals (e.g., latency, routing, and evidence constraints), rather than relying on either axis alone. For researchers, the next step is external replication across additional domains, model families, and deployment contexts, including direct benchmarked comparisons against alternative automated testing protocols under matched experimental budgets and domain-transfer calibrations as discussed in Section~\ref{sec:generalizability}. Supplementary pseudocode and rubric artifacts are provided in Appendix Section~\ref{sec:appendix} to support cumulative, externally validated progress in empirical QA for agentic systems.
+More broadly, we view automated self-testing as one specialization of a larger release-readiness stack in which observability, reproducible artifacts, and CI gating are shared across projects and evaluation modes~\cite{maiorano2026readiness}.
+

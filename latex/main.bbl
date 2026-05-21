@@ -1,0 +1,212 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{amershi2019se4ml}
+Amershi, S., Begel, A., Bird, C., DeLine, R., Gall, H., Kamar, E., Nagappan,
+  N., Nushi, B., Zimmermann, T.: Software engineering for machine learning: A
+  case study.
+\newblock In: Proceedings of the 41st International Conference on Software
+  Engineering: Software Engineering in Practice (ICSE-SEIP), pp. 291--300. IEEE
+  (2019).
+\newblock \doi{10.1109/ICSE-SEIP.2019.00042}
+
+\bibitem{bai2022constitutional}
+Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., Chen, A.,
+  Goldie, A., Mirhoseini, A., McKinnon, C., et~al.: Constitutional {AI}:
+  Harmlessness from {AI} feedback (2022)
+
+\bibitem{basili1994gqm}
+Basili, V.R., Caldiera, G., Rombach, H.D.: The goal question metric approach.
+\newblock In: J.J. Marciniak (ed.) Encyclopedia of Software Engineering,
+  vol.~1, pp. 528--532. John Wiley \& Sons (1994)
+
+\bibitem{breck2017mltest}
+Breck, E., Cai, S., Nielsen, E., Salib, M., Sculley, D.: The {ML} test score: A
+  rubric for {ML} production readiness and technical debt reduction.
+\newblock In: Proceedings of IEEE Big Data 2017 (2017).
+\newblock \doi{10.1109/BigData.2017.8258038}
+
+\bibitem{dobslaw2025testing}
+Dobslaw, F., Feldt, R., Yoon, J., Yoo, S.: Challenges in testing large language
+  model based software: A faceted taxonomy.
+\newblock arXiv preprint arXiv:2503.00481  (2025)
+
+\bibitem{feitelson2013facebook}
+Feitelson, D.G., Frachtenberg, E., Beck, K.L.: Development and deployment at
+  {Facebook}.
+\newblock IEEE Internet Computing \textbf{17}(4), 8--17 (2013).
+\newblock \doi{10.1109/MIC.2013.25}
+
+\bibitem{ganguli2022redteaming}
+Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S., Mann,
+  B., Perez, E., Schiefer, N., Ndousse, K., et~al.: Red teaming language models
+  to reduce harms: Methods, scaling behaviors, and lessons learned.
+\newblock arXiv preprint arXiv:2209.07858  (2022)
+
+\bibitem{greshake2023injection}
+Greshake, K., Abdelnabi, S., Mishra, S., Endres, C., Holz, T., Fritz, M.: Not
+  what you've signed up for: Compromising real-world {LLM}-integrated
+  applications with indirect prompt injection.
+\newblock In: Proceedings of the 16th ACM Workshop on Artificial Intelligence
+  and Security (AISec), pp. 79--90 (2023).
+\newblock \doi{10.1145/3605764.3623985}
+
+\bibitem{harrison2006dogfooding}
+Harrison, W.: Eating your own dog food.
+\newblock IEEE Software \textbf{23}(3), 5--7 (2006).
+\newblock \doi{10.1109/MS.2006.72}
+
+\bibitem{hendrycks2021mmlu}
+Hendrycks, D., Burns, C., Basart, S., Zou, A., Mazeika, M., Song, D.,
+  Steinhardt, J.: Measuring massive multitask language understanding.
+\newblock In: Proceedings of the International Conference on Learning
+  Representations (ICLR) (2021)
+
+\bibitem{hong2024metagpt}
+Hong, S., Zhuge, M., Chen, J., Zheng, X., Cheng, Y., Zhang, C., Wang, J., Wang,
+  Z., Yau, S.K.S., Lin, Z., Zhou, L., Ran, C., Xiao, L., Wu, C., Schmidhuber,
+  J.: {MetaGPT}: Meta programming for a multi-agent collaborative framework.
+\newblock In: Proceedings of the International Conference on Learning
+  Representations (ICLR 2024) (2024)
+
+\bibitem{karanam2025committees}
+Karanam, S.B.H., et~al.: Multi-agent {LLM} committees for autonomous software
+  beta testing.
+\newblock arXiv preprint arXiv:2512.21352  (2025).
+\newblock \doi{10.48550/arXiv.2512.21352}
+
+\bibitem{landis1977kappa}
+Landis, J.R., Koch, G.G.: The measurement of observer agreement for categorical
+  data.
+\newblock Biometrics \textbf{33}(1), 159--174 (1977).
+\newblock \doi{10.2307/2529310}
+
+\bibitem{liang2023helm}
+Liang, P., Bommasani, R., Lee, T., Tsipras, D., Soylu, D., Yasunaga, M., Zhang,
+  Y., Narayanan, D., Wu, Y., Kumar, A., et~al.: Holistic evaluation of language
+  models.
+\newblock Transactions on Machine Learning Research  (2023)
+
+\bibitem{maiorano2026readiness}
+Maiorano, A.C.: Llm readiness harness: Evaluation, observability, and ci gates
+  for llm/rag applications.
+\newblock arXiv preprint arXiv:2603.27355  (2026)
+
+\bibitem{nushi2017human}
+Nushi, B., Kamar, E., Horvitz, E., Kossmann, D.: On human intellect and machine
+  failures: Troubleshooting integrative machine learning systems.
+\newblock In: Thirty-First AAAI Conference on Artificial Intelligence (2017).
+\newblock \doi{10.1609/aaai.v31i1.10633}
+
+\bibitem{ouyang2022instructgpt}
+Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C., Mishkin, P., Zhang,
+  C., Agarwal, S., Slama, K., Ray, A., et~al.: Training language models to
+  follow instructions with human feedback.
+\newblock In: Advances in Neural Information Processing Systems 35 (NeurIPS
+  2022), pp. 27730--27744 (2022)
+
+\bibitem{perez2022redteaming}
+Perez, E., Huang, S., Song, F., Cai, T., Ring, R., Aslanides, J., Glaese, A.,
+  McAleese, N., Irving, G.: Red teaming language models with language models.
+\newblock In: Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP), pp. 3419--3448 (2022).
+\newblock \doi{10.18653/v1/2022.emnlp-main.225}
+
+\bibitem{ribeiro2020beyond}
+Ribeiro, M.T., Wu, T., Guestrin, C., Singh, S.: Beyond accuracy: Behavioral
+  testing of nlp models with checklist.
+\newblock In: Proceedings of the 58th Annual Meeting of the Association for
+  Computational Linguistics, pp. 4902--4912 (2020).
+\newblock \doi{10.18653/v1/2020.acl-main.442}
+
+\bibitem{rossi2016facebook}
+Rossi, C., Shibley, E., Su, S., Beck, K.L., Savor, T., Stumm, M.: Continuous
+  deployment of mobile software at {Facebook} (showcase).
+\newblock In: Proceedings of the 2016 24th ACM SIGSOFT International Symposium
+  on Foundations of Software Engineering (FSE). ACM (2016).
+\newblock \doi{10.1145/2950290.2994157}
+
+\bibitem{runeson2009guidelines}
+Runeson, P., H{\"o}st, M.: Guidelines for conducting and reporting case study
+  research in software engineering.
+\newblock Empirical Software Engineering \textbf{14}(2), 131--164 (2009).
+\newblock \doi{10.1007/s10664-008-9102-8}
+
+\bibitem{schermann2016qualitygates}
+Schermann, G., Cito, J., Leitner, P., Gall, H.C.: Towards quality gates in
+  continuous delivery and deployment.
+\newblock In: 2016 IEEE 24th International Conference on Program Comprehension
+  (ICPC), pp. 1--4. IEEE (2016).
+\newblock \doi{10.1109/ICPC.2016.7503737}
+
+\bibitem{sculley2015debt}
+Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D.,
+  Chaudhary, V., Young, M., Crespo, J.F., Dennison, D.: Hidden technical debt
+  in machine learning systems.
+\newblock In: Advances in Neural Information Processing Systems 28 (NIPS 2015),
+  pp. 2503--2511 (2015).
+\newblock
+  \urlprefix\url{https://proceedings.neurips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html}
+
+\bibitem{segura2016metamorphic}
+Segura, S., Fraser, G., Sanchez, A.B., Ruiz-Cort\'{e}s, A.: A survey on
+  metamorphic testing.
+\newblock IEEE Transactions on Software Engineering \textbf{42}(9), 805--824
+  (2016).
+\newblock \doi{10.1109/TSE.2016.2532875}
+
+\bibitem{shahin2017cicd}
+Shahin, M., Babar, M.A., Zhu, L.: Continuous integration, delivery and
+  deployment: A systematic review on approaches, tools, challenges and
+  practices.
+\newblock IEEE Access \textbf{5}, 3909--3943 (2017).
+\newblock \doi{10.1109/ACCESS.2017.2685629}
+
+\bibitem{shankar2024who}
+Shankar, S., Zamfirescu-Pereira, J.D., Hartmann, B., Parameswaran, A.G.,
+  Arawjo, I.: Who validates the validators? aligning llm-assisted evaluation of
+  llm outputs with human preferences.
+\newblock In: Proceedings of the 37th Annual ACM Symposium on User Interface
+  Software and Technology (2024).
+\newblock \doi{10.1145/3654777.3676450}
+
+\bibitem{sorokin2026stellar}
+Sorokin, L., Vasilev, I., Friedl, K.E., Stocco, A.: {STELLAR}: A search-based
+  testing framework for large language model applications.
+\newblock In: Proceedings of the 33rd International Conference on Software
+  Analysis, Evolution and Reengineering (SANER 2026) (2026).
+\newblock \doi{10.48550/arXiv.2601.00497}
+
+\bibitem{srivastava2023bigbench}
+Srivastava, A., Rastogi, A., Rao, A., Shoeb, A.A.M., Abid, A., Fisch, A.,
+  Brown, A.R., Santoro, A., Gupta, A., et~al.: Beyond the imitation game:
+  Quantifying and extrapolating the capabilities of language models.
+\newblock Transactions on Machine Learning Research  (2023).
+\newblock BIG-bench collaboration
+
+\bibitem{wohlin2012experimentation}
+Wohlin, C., Runeson, P., H{\"o}st, M., Ohlsson, M.C., Regnell, B., Wessl\'{e}n,
+  A.: Experimentation in Software Engineering.
+\newblock Springer Berlin, Heidelberg (2012).
+\newblock \doi{10.1007/978-3-642-29044-2}
+
+\bibitem{wu2024autogen}
+Wu, Q., Bansal, G., Zhang, J., Wu, Y., Li, B., Zhu, E., Jiang, L., Zhang, X.,
+  Zhang, S., Liu, J., Awadallah, A.H., White, R.W., Burger, D., Wang, C.:
+  {AutoGen}: Enabling next-gen {LLM} applications via multi-agent conversation.
+\newblock In: Proceedings of the Conference on Language Modeling (COLM 2024)
+  (2024)
+
+\bibitem{zheng2023judging}
+Zheng, L., Chiang, W.L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z.,
+  Li, Z., Li, D., Xing, E.P., Zhang, H., Gonzalez, J.E., Stoica, I.: Judging
+  {LLM}-as-a-judge with {MT-Bench} and {Chatbot Arena}.
+\newblock In: Advances in Neural Information Processing Systems 36 (NeurIPS
+  2023) (2023)
+
+\end{thebibliography}

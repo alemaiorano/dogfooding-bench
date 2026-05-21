@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Mann-Kendall trend test for monotonic trends ($\alpha=0.05$).}
+\label{tab:mann_kendall}
+\begin{tabular}{p{1.75cm}llrl}
+\toprule
+\textbf{Metric} & \textbf{Trend} & \textbf{$\tau$} & \textbf{p-value} & \textbf{Sig.} \\
+\midrule
+Task Success Rate (\%) & decreasing & -0.320 & 0.0038 & Yes \\
+P95 Latency (ms) & increasing & 0.374 & 0.0010 & Yes \\
+Research Context Preservation (\%) & no trend & 0.000 & 1.0000 & No \\
+Safety Pass Rate (\%) & no trend & -0.132 & 0.2037 & No \\
+Evidence Coverage (\%) & no trend & -0.024 & 0.7306 & No \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table}

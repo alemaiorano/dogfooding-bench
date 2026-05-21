@@ -1,0 +1,4367 @@
+{
+  "metadata": {
+    "runId": "aichat-eval-1770730390247",
+    "timestamp": "2026-02-10T13:33:10.247Z",
+    "environment": "http://localhost:3001",
+    "user": "ale_maiorano@hotmail.com",
+    "questionSet": "expanded",
+    "modelVersion": "gemini-2.5-pro/flash",
+    "promptVersion": "r2.1",
+    "durationMs": 59407
+  },
+  "scope": {
+    "questionSet": "expanded",
+    "environment": "http://localhost:3001",
+    "totalQuestions": 13,
+    "categories": [
+      "faq",
+      "data_query",
+      "research"
+    ]
+  },
+  "kpiSummary": {
+    "totalTests": 13,
+    "passedTests": 13,
+    "failedTests": 0,
+    "avgLatencyMs": 4503,
+    "p95LatencyMs": 11522,
+    "researchContextPreservation": 100,
+    "faqAccuracy": 100,
+    "dataQueryAccuracy": 100,
+    "helpfulRate": 100,
+    "noFollowUpResolutionRate": 100,
+    "safetyPassRate": 100,
+    "evidenceCoverage": 100
+  },
+  "stratified": {
+    "byQuestionSet": [
+      {
+        "key": "expanded",
+        "total": 13,
+        "passed": 13,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4503,
+        "p95LatencyMs": 11522
+      }
+    ],
+    "byRawCategory": [
+      {
+        "key": "content_generation",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 2920,
+        "p95LatencyMs": 2920
+      },
+      {
+        "key": "general",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 11522,
+        "p95LatencyMs": 11522
+      },
+      {
+        "key": "market_context",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 355,
+        "p95LatencyMs": 355
+      },
+      {
+        "key": "multi_turn",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 3293,
+        "p95LatencyMs": 6568
+      },
+      {
+        "key": "roi_clarity",
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 3866,
+        "p95LatencyMs": 4565
+      },
+      {
+        "key": "strategic_advice",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 6502,
+        "p95LatencyMs": 9692
+      },
+      {
+        "key": "visualization",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 5874,
+        "p95LatencyMs": 5874
+      },
+      {
+        "key": "web_search",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 3775,
+        "p95LatencyMs": 3775
+      },
+      {
+        "key": "workflow_fit",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 2903,
+        "p95LatencyMs": 2903
+      }
+    ],
+    "byMappedCategory": [
+      {
+        "key": "data_query",
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4442,
+        "p95LatencyMs": 9692
+      },
+      {
+        "key": "faq",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 7213,
+        "p95LatencyMs": 11522
+      },
+      {
+        "key": "research",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 2065,
+        "p95LatencyMs": 3775
+      }
+    ],
+    "byIntent": [
+      {
+        "key": "clarification",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 2903,
+        "p95LatencyMs": 2903
+      },
+      {
+        "key": "comparison",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4565,
+        "p95LatencyMs": 4565
+      },
+      {
+        "key": "concept",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 7649,
+        "p95LatencyMs": 11522
+      },
+      {
+        "key": "data",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 1704,
+        "p95LatencyMs": 3390
+      },
+      {
+        "key": "insight",
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4569,
+        "p95LatencyMs": 9692
+      },
+      {
+        "key": "trend",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4759,
+        "p95LatencyMs": 5874
+      }
+    ],
+    "byRequiresWeb": [
+      {
+        "key": "requiresWeb=false",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 4564,
+        "p95LatencyMs": 11522
+      },
+      {
+        "key": "requiresWeb=true",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "successRate": 100,
+        "avgLatencyMs": 3775,
+        "p95LatencyMs": 3775
+      }
+    ]
+  },
+  "qualityGates": [
+    {
+      "name": "Success Rate > 80%",
+      "threshold": "80%",
+      "actual": "100%",
+      "pass": true
+    },
+    {
+      "name": "Research Context Preservation > 90%",
+      "threshold": "90%",
+      "actual": "100%",
+      "pass": true
+    },
+    {
+      "name": "P95 Latency < 15000ms",
+      "threshold": "15000ms",
+      "actual": "11522ms",
+      "pass": true
+    },
+    {
+      "name": "Helpful Rate > 75%",
+      "threshold": "75%",
+      "actual": "100%",
+      "pass": true
+    },
+    {
+      "name": "Safety Pass Rate > 95%",
+      "threshold": "95%",
+      "actual": "100%",
+      "pass": true
+    },
+    {
+      "name": "Evidence Coverage (research) >= 80%",
+      "threshold": "80%",
+      "actual": "100%",
+      "pass": true
+    }
+  ],
+  "triage": {
+    "highSeverity": 0,
+    "mediumSeverity": 0,
+    "lowSeverity": 0,
+    "items": [],
+    "issuesCreated": []
+  },
+  "activeLearning": {
+    "newCandidateQuestions": 0,
+    "promotedToRegression": 0,
+    "lowConfidenceQueue": []
+  },
+  "results": [
+    {
+      "testId": "concept-001",
+      "questionSet": "expanded",
+      "message": "What is NPS and how is it calculated in this tool?",
+      "category": "faq",
+      "rawCategory": "general",
+      "rawIntent": "concept",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 11522,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "response"
+      ],
+      "responseText": "NPS, ou Net Promoter Score, é uma métrica fundamental para medir a lealdade e satisfação do cliente. Ele ajuda a entender a probabilidade de seus clientes recomendarem seu produto ou serviço a outras pessoas.\n\n**Como funciona?**\nOs clientes são convidados a responder a uma única pergunta em uma escala de 0 a 10: \"Qual a probabilidade de você recomendar [sua empresa/produto/serviço] a um amigo ou colega?\"\n\nCom base nas respostas, os clientes são categorizados em três grupos:\n*   **Promotores (9-1",
+      "sourceIds": [
+        "explanation_nps"
+      ],
+      "intent": "explanation",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:general/concept",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730331743
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730331745
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730331747
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730331750
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730331751
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0.5
+          },
+          "timestamp": 1770730337639
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730337641
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "explanation",
+            "confidence": 0.95,
+            "complexity": "simple"
+          },
+          "timestamp": 1770730339119
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730339121
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "NPS, ou Net Promoter Score, é uma métrica fundamental para medir a lealdade e satisfação do cliente. Ele ajuda a entender a probabilidade de seus clientes recomendarem seu produto ou serviço a outras pessoas.\n\n**Como funciona?**\nOs clientes são convidados a responder a uma única pergunta em uma escala de 0 a 10: \"Qual a probabilidade de você recomendar [sua empresa/produto/serviço] a um amigo ou colega?\"\n\nCom base nas respostas, os clientes são categorizados em três grupos:\n*   **Promotores (9-10):** Clientes leais e entusiastas que provavelmente continuarão comprando e indicando sua empresa.\n*   **Passivos (7-8):** Clientes satisfeitos, mas não entusiasmados, que podem ser vulneráveis a ofertas da concorrência.\n*   **Detratores (0-6):** Clientes insatisfeitos que podem prejudicar sua marca através de boca a boca negativo.\n\n**Cálculo no the platform:**\nO the platform calcula o NPS usando a metodologia padrão da indústria:\n\n**NPS = (% de Promotores) - (% de Detratores)**\n\nPor exemplo, se 60% dos seus clientes são Promotores e 10% são Detratores, seu NPS seria 50 (60% - 10%). Os Passivos são incluídos no cálculo do percentual total de respondentes, mas não afetam diretamente o score final. Um NPS positivo é geralmente considerado bom, e um score acima de 50 é excelente.\n\nEsta métrica oferece uma visão clara da saúde do seu relacionamento com o cliente e do potencial de crescimento orgânico através de indicações.",
+          "timestamp": 1770730343206
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 990,
+            "cost": 0.00037125
+          },
+          "timestamp": 1770730343206
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730331743,
+          "completedAt": 1770730331745,
+          "durationMs": 2
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730331747,
+          "completedAt": 1770730331750,
+          "durationMs": 3
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730331751,
+          "completedAt": 1770730337639,
+          "durationMs": 5888
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730337641,
+          "completedAt": 1770730339119,
+          "durationMs": 1478
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730339121,
+          "completedAt": 1770730343206,
+          "durationMs": 4085
+        }
+      ]
+    },
+    {
+      "testId": "data-001",
+      "questionSet": "expanded",
+      "message": "How many simulations have I run in the last month?",
+      "category": "data_query",
+      "rawCategory": "roi_clarity",
+      "rawIntent": "data",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 3390,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Você não executou nenhuma simulação no último mês.",
+      "sourceIds": [
+        "Resultado 1"
+      ],
+      "intent": "data_query",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:roi_clarity/data",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730343232
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730343233
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730343235
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730343237
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730343239
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730343240
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730343241
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "data_query",
+            "confidence": 0.95,
+            "complexity": "simple"
+          },
+          "timestamp": 1770730344820
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730344822
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 1
+          },
+          "timestamp": 1770730344826
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730344827
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Você não executou nenhuma simulação no último mês.",
+          "timestamp": 1770730346609
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 667,
+            "cost": 0.000250125
+          },
+          "timestamp": 1770730346609
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730343232,
+          "completedAt": 1770730343233,
+          "durationMs": 1
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730343235,
+          "completedAt": 1770730343237,
+          "durationMs": 2
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730343239,
+          "completedAt": 1770730343240,
+          "durationMs": 1
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730343241,
+          "completedAt": 1770730344820,
+          "durationMs": 1579
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730344822,
+          "completedAt": 1770730344826,
+          "durationMs": 4
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730344827,
+          "completedAt": 1770730346609,
+          "durationMs": 1782
+        }
+      ]
+    },
+    {
+      "testId": "trend-001",
+      "questionSet": "expanded",
+      "message": "Show me the trend of clarity scores over the last 30 days.",
+      "category": "data_query",
+      "rawCategory": "roi_clarity",
+      "rawIntent": "trend",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 3644,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível encontrar dados para a tendência de pontuação de clareza nos últimos 30 dias. A base de dados retornou um conjunto de dados vazio para este período.",
+      "sourceIds": [
+        "Resultado 1"
+      ],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:roi_clarity/trend",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730346620
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730346620
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730346621
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "action_verb"
+          },
+          "timestamp": 1770730346621
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730346622
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "bypassReason": "data_follow_up"
+          },
+          "timestamp": 1770730346622
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730346623
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.95,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730348104
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730348105
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730348109
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730348110
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível encontrar dados para a tendência de pontuação de clareza nos últimos 30 dias. A base de dados retornou um conjunto de dados vazio para este período.",
+          "timestamp": 1770730350252
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 724,
+            "cost": 0.00027150000000000004
+          },
+          "timestamp": 1770730350252
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730346620,
+          "completedAt": 1770730346620,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730346621,
+          "completedAt": 1770730346621,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730346622,
+          "completedAt": 1770730346622,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730346623,
+          "completedAt": 1770730348104,
+          "durationMs": 1481
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730348105,
+          "completedAt": 1770730348109,
+          "durationMs": 4
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730348110,
+          "completedAt": 1770730350252,
+          "durationMs": 2142
+        }
+      ]
+    },
+    {
+      "testId": "comparison-001",
+      "questionSet": "expanded",
+      "message": "Which of my recent simulations had the highest clarity score?",
+      "category": "data_query",
+      "rawCategory": "roi_clarity",
+      "rawIntent": "comparison",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 4565,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível determinar qual das suas simulações recentes teve a pontuação de clareza mais alta, pois não encontramos dados de pontuação de clareza para o período recente. O sistema indica que não há registros de pontuações de clareza disponíveis.",
+      "sourceIds": [
+        "Resultado 1"
+      ],
+      "intent": "data_query",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:roi_clarity/comparison",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730350266
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730350267
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730350268
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730350268
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730350269
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730350269
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730350271
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "data_query",
+            "confidence": 0.9,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730352220
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730352222
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730352225
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730352226
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível determinar qual das suas simulações recentes teve a pontuação de clareza mais alta, pois não encontramos dados de pontuação de clareza para o período recente. O sistema indica que não há registros de pontuações de clareza disponíveis.",
+          "timestamp": 1770730354820
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 754,
+            "cost": 0.00028275
+          },
+          "timestamp": 1770730354820
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730350266,
+          "completedAt": 1770730350267,
+          "durationMs": 1
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730350268,
+          "completedAt": 1770730350268,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730350269,
+          "completedAt": 1770730350269,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730350271,
+          "completedAt": 1770730352220,
+          "durationMs": 1949
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730352222,
+          "completedAt": 1770730352225,
+          "durationMs": 3
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730352226,
+          "completedAt": 1770730354820,
+          "durationMs": 2594
+        }
+      ]
+    },
+    {
+      "testId": "followup-001-a",
+      "questionSet": "expanded",
+      "message": "List my top 3 simulations.",
+      "category": "data_query",
+      "rawCategory": "multi_turn",
+      "rawIntent": "data",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 17,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "small_talk"
+      ],
+      "responseText": "No problem! Any other questions?",
+      "sourceIds": [
+        "small_talk_fast"
+      ],
+      "intent": "small_talk",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:multi_turn/data",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730354830
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730354830
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730354832
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730354832
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730354833
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "bypassReason": "data_follow_up"
+          },
+          "timestamp": 1770730354833
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730354835
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "small_talk",
+            "confidence": 0.99,
+            "complexity": "simple"
+          },
+          "timestamp": 1770730354835
+        },
+        {
+          "type": "agent_start",
+          "agent": "small_talk",
+          "data": null,
+          "message": "Thinking of a response...",
+          "timestamp": 1770730354837
+        },
+        {
+          "type": "agent_complete",
+          "agent": "small_talk",
+          "data": {
+            "success": true
+          },
+          "timestamp": 1770730354837
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730354830,
+          "completedAt": 1770730354830,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730354832,
+          "completedAt": 1770730354832,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730354833,
+          "completedAt": 1770730354833,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730354835,
+          "completedAt": 1770730354835,
+          "durationMs": 0
+        },
+        {
+          "agent": "small_talk",
+          "startedAt": 1770730354837,
+          "completedAt": 1770730354837,
+          "durationMs": 0
+        }
+      ]
+    },
+    {
+      "testId": "followup-001-b",
+      "questionSet": "expanded",
+      "message": "Why did the first one perform so well?",
+      "category": "data_query",
+      "rawCategory": "multi_turn",
+      "rawIntent": "insight",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 6568,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível analisar o motivo do bom desempenho do item \"first_one\" porque os dados históricos dos últimos 30 dias estão vazios. Para fornecer uma análise detalhada, preciso de informações sobre as métricas de desempenho (por exemplo, vendas, cliques, conversões) e quaisquer fatores contextuais relevantes para esse item.",
+      "sourceIds": [],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "Requires context from previous turn",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730356331
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730356331
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730356332
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730356332
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730356333
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730356333
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730356334
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.9,
+            "complexity": "complex"
+          },
+          "timestamp": 1770730358752
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730358753
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730358756
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730358757
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível analisar o motivo do bom desempenho do item \"first_one\" porque os dados históricos dos últimos 30 dias estão vazios. Para fornecer uma análise detalhada, preciso de informações sobre as métricas de desempenho (por exemplo, vendas, cliques, conversões) e quaisquer fatores contextuais relevantes para esse item.",
+          "timestamp": 1770730361405
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 736,
+            "cost": 0.000276
+          },
+          "timestamp": 1770730361405
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730356331,
+          "completedAt": 1770730356331,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730356332,
+          "completedAt": 1770730356332,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730356333,
+          "completedAt": 1770730356333,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730356334,
+          "completedAt": 1770730358752,
+          "durationMs": 2418
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730358753,
+          "completedAt": 1770730358756,
+          "durationMs": 3
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730358757,
+          "completedAt": 1770730361405,
+          "durationMs": 2648
+        }
+      ]
+    },
+    {
+      "testId": "ambiguous-001",
+      "questionSet": "expanded",
+      "message": "Is it working?",
+      "category": "faq",
+      "rawCategory": "workflow_fit",
+      "rawIntent": "clarification",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 2903,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "response"
+      ],
+      "responseText": "Para que eu possa te ajudar, preciso de mais informações. Você poderia me dizer a que você se refere com \"isso\"?",
+      "sourceIds": [],
+      "intent": "general",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:workflow_fit/clarification",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730361415
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730361415
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730361416
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "reference"
+          },
+          "timestamp": 1770730361416
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730361417
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730361417
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730361419
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "general",
+            "confidence": 0.85,
+            "complexity": "simple"
+          },
+          "timestamp": 1770730362603
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730362604
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Para que eu possa te ajudar, preciso de mais informações. Você poderia me dizer a que você se refere com \"isso\"?",
+          "timestamp": 1770730364306
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 637,
+            "cost": 0.000238875
+          },
+          "timestamp": 1770730364306
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730361415,
+          "completedAt": 1770730361415,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730361416,
+          "completedAt": 1770730361416,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730361417,
+          "completedAt": 1770730361417,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730361419,
+          "completedAt": 1770730362603,
+          "durationMs": 1184
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730362604,
+          "completedAt": 1770730364306,
+          "durationMs": 1702
+        }
+      ]
+    },
+    {
+      "testId": "gen-001",
+      "questionSet": "expanded",
+      "message": "Draft a LinkedIn post announcing our new feature based on the best performing simulation copy.",
+      "category": "data_query",
+      "rawCategory": "content_generation",
+      "rawIntent": "insight",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 2920,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não consegui encontrar os dados da \"melhor cópia de simulação\" para usar como base para o seu post no LinkedIn. Os dados históricos disponíveis para os últimos 30 dias estão vazios.\n\nPor favor, forneça a cópia específica que gostaria de usar para o anúncio do novo recurso, ou me diga onde posso encontrá-la, para que eu possa ajudá-lo a elaborar o post.",
+      "sourceIds": [],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:content_generation/insight",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730364320
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730364320
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730364321
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730364321
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730364322
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730364322
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730364324
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.9,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730364324
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730364325
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730364327
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730364328
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não consegui encontrar os dados da \"melhor cópia de simulação\" para usar como base para o seu post no LinkedIn. Os dados históricos disponíveis para os últimos 30 dias estão vazios.\n\nPor favor, forneça a cópia específica que gostaria de usar para o anúncio do novo recurso, ou me diga onde posso encontrá-la, para que eu possa ajudá-lo a elaborar o post.",
+          "timestamp": 1770730367228
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 738,
+            "cost": 0.00027675000000000003
+          },
+          "timestamp": 1770730367228
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730364320,
+          "completedAt": 1770730364320,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730364321,
+          "completedAt": 1770730364321,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730364322,
+          "completedAt": 1770730364322,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730364324,
+          "completedAt": 1770730364324,
+          "durationMs": 0
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730364325,
+          "completedAt": 1770730364327,
+          "durationMs": 2
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730364328,
+          "completedAt": 1770730367228,
+          "durationMs": 2900
+        }
+      ]
+    },
+    {
+      "testId": "strat-001",
+      "questionSet": "expanded",
+      "message": "Based on my recent simulations, what is the biggest risk in my current messaging?",
+      "category": "data_query",
+      "rawCategory": "strategic_advice",
+      "rawIntent": "insight",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 3312,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível identificar o maior risco na sua comunicação atual com base nas simulações recentes, pois os dados correspondentes não foram encontrados. Para realizar esta análise, preciso de acesso aos resultados das suas simulações de risco de mensagens.",
+      "sourceIds": [],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:strategic_advice/insight",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730367237
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730367238
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730367239
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730367239
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730367240
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730367240
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730367241
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.92,
+            "complexity": "complex"
+          },
+          "timestamp": 1770730368413
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730368414
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730368416
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730368417
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível identificar o maior risco na sua comunicação atual com base nas simulações recentes, pois os dados correspondentes não foram encontrados. Para realizar esta análise, preciso de acesso aos resultados das suas simulações de risco de mensagens.",
+          "timestamp": 1770730370541
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 729,
+            "cost": 0.000273375
+          },
+          "timestamp": 1770730370541
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730367237,
+          "completedAt": 1770730367238,
+          "durationMs": 1
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730367239,
+          "completedAt": 1770730367239,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730367240,
+          "completedAt": 1770730367240,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730367241,
+          "completedAt": 1770730368413,
+          "durationMs": 1172
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730368414,
+          "completedAt": 1770730368416,
+          "durationMs": 2
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730368417,
+          "completedAt": 1770730370541,
+          "durationMs": 2124
+        }
+      ]
+    },
+    {
+      "testId": "market-001",
+      "questionSet": "expanded",
+      "message": "How does a 65% clarity score compare to B2B SaaS industry benchmarks?",
+      "category": "research",
+      "rawCategory": "market_context",
+      "rawIntent": "insight",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 355,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "I could not find enough verifiable external sources (for example, arXiv/DOI) to answer safely right now. I can retry with a narrower topic, timeframe, or search terms.",
+      "sourceIds": [
+        "no_data_research"
+      ],
+      "intent": "research",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:market_context/insight",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730370549
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730370549
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730370550
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730370550
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730370551
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730370551
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730370552
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "research",
+            "confidence": 0.9,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730370552
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730370553
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 0,
+            "queryCount": 0
+          },
+          "timestamp": 1770730370895
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730370896
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "I could not find enough verifiable external sources (for example, arXiv/DOI) to answer safely right now. I can retry with a narrower topic, timeframe, or search terms.",
+          "timestamp": 1770730370897
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "no_data_fallback",
+            "tokensUsed": 0,
+            "cost": 0
+          },
+          "timestamp": 1770730370897
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730370549,
+          "completedAt": 1770730370549,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730370550,
+          "completedAt": 1770730370550,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730370551,
+          "completedAt": 1770730370551,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730370552,
+          "completedAt": 1770730370552,
+          "durationMs": 0
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730370553,
+          "completedAt": 1770730370895,
+          "durationMs": 342
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730370896,
+          "completedAt": 1770730370897,
+          "durationMs": 1
+        }
+      ]
+    },
+    {
+      "testId": "seg-001",
+      "questionSet": "expanded",
+      "message": "Which persona segment is showing the most confusion with our pricing page?",
+      "category": "data_query",
+      "rawCategory": "strategic_advice",
+      "rawIntent": "insight",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 9692,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível identificar qual segmento de persona está demonstrando mais confusão com a página de preços, pois os dados históricos dos últimos 30 dias estão vazios. Para realizar essa análise, precisamos de dados de interação dos usuários com a página de preços que indiquem sinais de confusão (por exemplo, tempo excessivo na página, múltiplos cliques em FAQs de preço, abandonos de carrinho após visitar a página de preços, ou feedback direto).",
+      "sourceIds": [
+        "Resultado 1"
+      ],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:strategic_advice/insight",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730372052
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730372053
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730372053
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730372054
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730372055
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730372055
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730372056
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.95,
+            "complexity": "complex"
+          },
+          "timestamp": 1770730376225
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730376226
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730376229
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730376229
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível identificar qual segmento de persona está demonstrando mais confusão com a página de preços, pois os dados históricos dos últimos 30 dias estão vazios. Para realizar essa análise, precisamos de dados de interação dos usuários com a página de preços que indiquem sinais de confusão (por exemplo, tempo excessivo na página, múltiplos cliques em FAQs de preço, abandonos de carrinho após visitar a página de preços, ou feedback direto).",
+          "timestamp": 1770730380587
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 821,
+            "cost": 0.000307875
+          },
+          "timestamp": 1770730380587
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730372052,
+          "completedAt": 1770730372053,
+          "durationMs": 1
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730372053,
+          "completedAt": 1770730372054,
+          "durationMs": 1
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730372055,
+          "completedAt": 1770730372055,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730372056,
+          "completedAt": 1770730376225,
+          "durationMs": 4169
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730376226,
+          "completedAt": 1770730376229,
+          "durationMs": 3
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730376229,
+          "completedAt": 1770730380587,
+          "durationMs": 4358
+        }
+      ]
+    },
+    {
+      "testId": "chart-001",
+      "questionSet": "expanded",
+      "message": "Plot a chart of my simulation confidence scores over time.",
+      "category": "data_query",
+      "rawCategory": "visualization",
+      "rawIntent": "trend",
+      "requiresWeb": false,
+      "success": true,
+      "latencyMs": 5874,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não foi possível gerar o gráfico de pontuações de confiança da simulação ao longo do tempo, pois não encontramos dados históricos disponíveis para esta métrica. Por favor, verifique se há dados registrados ou se a métrica está configurada corretamente.",
+      "sourceIds": [
+        "Resultado 1"
+      ],
+      "intent": "analysis",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:visualization/trend",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730380597
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730380597
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730380598
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730380598
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730380599
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "bypassReason": "data_follow_up"
+          },
+          "timestamp": 1770730380599
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730380600
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "analysis",
+            "confidence": 0.9,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730384496
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730384497
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730384499
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730384500
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não foi possível gerar o gráfico de pontuações de confiança da simulação ao longo do tempo, pois não encontramos dados históricos disponíveis para esta métrica. Por favor, verifique se há dados registrados ou se a métrica está configurada corretamente.",
+          "timestamp": 1770730386463
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 742,
+            "cost": 0.00027825
+          },
+          "timestamp": 1770730386463
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730380597,
+          "completedAt": 1770730380597,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730380598,
+          "completedAt": 1770730380598,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730380599,
+          "completedAt": 1770730380599,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730380600,
+          "completedAt": 1770730384496,
+          "durationMs": 3896
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730384497,
+          "completedAt": 1770730384499,
+          "durationMs": 2
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730384500,
+          "completedAt": 1770730386463,
+          "durationMs": 1963
+        }
+      ]
+    },
+    {
+      "testId": "web-001",
+      "questionSet": "expanded",
+      "message": "Search the web for the latest email marketing open rate benchmarks for 2025.",
+      "category": "research",
+      "rawCategory": "web_search",
+      "rawIntent": "concept",
+      "requiresWeb": true,
+      "success": true,
+      "latencyMs": 3775,
+      "agentPath": [
+        "input_guardrails",
+        "context_enrichment",
+        "faq_agent",
+        "intent_classifier",
+        "research",
+        "response"
+      ],
+      "responseText": "Não consegui encontrar dados específicos sobre benchmarks de taxas de abertura de e-mail marketing para 2025 na pesquisa realizada. O resultado obtido refere-se a um estudo sobre previsão de preços de ações usando deep learning, o que não está relacionado à sua consulta.\n\nSources: http://arxiv.org/abs/2407.01572v1 | http://arxiv.org/abs/1704.06910v1 | http://arxiv.org/abs/2207.01558v1",
+      "sourceIds": [
+        "http://arxiv.org/abs/2407.01572v1",
+        "http://arxiv.org/abs/1704.06910v1",
+        "http://arxiv.org/abs/2207.01558v1",
+        "http://arxiv.org/abs/2408.01470v1"
+      ],
+      "intent": "research",
+      "faqHandled": false,
+      "issues": [],
+      "notes": "chat-question-bank-expanded:web_search/concept [requiresWeb]",
+      "traceEvents": [
+        {
+          "type": "agent_start",
+          "agent": "input_guardrails",
+          "data": null,
+          "message": "Checking message security...",
+          "timestamp": 1770730386472
+        },
+        {
+          "type": "agent_complete",
+          "agent": "input_guardrails",
+          "data": {
+            "passed": true
+          },
+          "timestamp": 1770730386472
+        },
+        {
+          "type": "agent_start",
+          "agent": "context_enrichment",
+          "data": null,
+          "message": "Analyzing conversation context...",
+          "timestamp": 1770730386473
+        },
+        {
+          "type": "agent_complete",
+          "agent": "context_enrichment",
+          "data": {
+            "wasEnriched": false,
+            "enrichmentType": "none"
+          },
+          "timestamp": 1770730386473
+        },
+        {
+          "type": "agent_start",
+          "agent": "faq_agent",
+          "data": null,
+          "message": "Consulting internal documentation...",
+          "timestamp": 1770730386474
+        },
+        {
+          "type": "agent_complete",
+          "agent": "faq_agent",
+          "data": {
+            "handled": false,
+            "confidence": 0
+          },
+          "timestamp": 1770730386474
+        },
+        {
+          "type": "agent_start",
+          "agent": "intent_classifier",
+          "data": null,
+          "message": "Identifying your intent...",
+          "timestamp": 1770730386476
+        },
+        {
+          "type": "agent_complete",
+          "agent": "intent_classifier",
+          "data": {
+            "intent": "research",
+            "confidence": 0.9,
+            "complexity": "medium"
+          },
+          "timestamp": 1770730386476
+        },
+        {
+          "type": "agent_start",
+          "agent": "research",
+          "data": null,
+          "message": "Performing external research and technical analysis...",
+          "timestamp": 1770730386477
+        },
+        {
+          "type": "agent_complete",
+          "agent": "research",
+          "data": {
+            "dataCount": 1,
+            "queryCount": 0
+          },
+          "timestamp": 1770730386599
+        },
+        {
+          "type": "agent_start",
+          "agent": "response",
+          "data": null,
+          "message": "Formulating the final response...",
+          "timestamp": 1770730386600
+        },
+        {
+          "type": "token",
+          "agent": "response",
+          "data": "Não consegui encontrar dados específicos sobre benchmarks de taxas de abertura de e-mail marketing para 2025 na pesquisa realizada. O resultado obtido refere-se a um estudo sobre previsão de preços de ações usando deep learning, o que não está relacionado à sua consulta.\n\nSources: http://arxiv.org/abs/2407.01572v1 | http://arxiv.org/abs/1704.06910v1 | http://arxiv.org/abs/2207.01558v1",
+          "timestamp": 1770730390236
+        },
+        {
+          "type": "agent_complete",
+          "agent": "response",
+          "data": {
+            "modelUsed": "gemini-2.5-flash",
+            "tokensUsed": 945,
+            "cost": 0.000354375
+          },
+          "timestamp": 1770730390236
+        }
+      ],
+      "traceSpans": [
+        {
+          "agent": "input_guardrails",
+          "startedAt": 1770730386472,
+          "completedAt": 1770730386472,
+          "durationMs": 0
+        },
+        {
+          "agent": "context_enrichment",
+          "startedAt": 1770730386473,
+          "completedAt": 1770730386473,
+          "durationMs": 0
+        },
+        {
+          "agent": "faq_agent",
+          "startedAt": 1770730386474,
+          "completedAt": 1770730386474,
+          "durationMs": 0
+        },
+        {
+          "agent": "intent_classifier",
+          "startedAt": 1770730386476,
+          "completedAt": 1770730386476,
+          "durationMs": 0
+        },
+        {
+          "agent": "research",
+          "startedAt": 1770730386477,
+          "completedAt": 1770730386599,
+          "durationMs": 122
+        },
+        {
+          "agent": "response",
+          "startedAt": 1770730386600,
+          "completedAt": 1770730390236,
+          "durationMs": 3636
+        }
+      ]
+    }
+  ],
+  "recommendation": "promote",
+  "topIssues": [],
+  "insights": [
+    "Question sets: expanded",
+    "Taxa de sucesso agregada: 100%",
+    "P95 latência agregada: 11522ms"
+  ],
+  "trace": {
+    "kind": "agent_stream_events",
+    "tests": [
+      {
+        "testId": "concept-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730331743,
+            "completedAt": 1770730331745,
+            "durationMs": 2
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730331747,
+            "completedAt": 1770730331750,
+            "durationMs": 3
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730331751,
+            "completedAt": 1770730337639,
+            "durationMs": 5888
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730337641,
+            "completedAt": 1770730339119,
+            "durationMs": 1478
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730339121,
+            "completedAt": 1770730343206,
+            "durationMs": 4085
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730331743
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730331745
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730331747
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730331750
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730331751
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0.5
+            },
+            "timestamp": 1770730337639
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730337641
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "explanation",
+              "confidence": 0.95,
+              "complexity": "simple"
+            },
+            "timestamp": 1770730339119
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730339121
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "NPS, ou Net Promoter Score, é uma métrica fundamental para medir a lealdade e satisfação do cliente. Ele ajuda a entender a probabilidade de seus clientes recomendarem seu produto ou serviço a outras pessoas.\n\n**Como funciona?**\nOs clientes são convidados a responder a uma única pergunta em uma escala de 0 a 10: \"Qual a probabilidade de você recomendar [sua empresa/produto/serviço] a um amigo ou colega?\"\n\nCom base nas respostas, os clientes são categorizados em três grupos:\n*   **Promotores (9-10):** Clientes leais e entusiastas que provavelmente continuarão comprando e indicando sua empresa.\n*   **Passivos (7-8):** Clientes satisfeitos, mas não entusiasmados, que podem ser vulneráveis a ofertas da concorrência.\n*   **Detratores (0-6):** Clientes insatisfeitos que podem prejudicar sua marca através de boca a boca negativo.\n\n**Cálculo no the platform:**\nO the platform calcula o NPS usando a metodologia padrão da indústria:\n\n**NPS = (% de Promotores) - (% de Detratores)**\n\nPor exemplo, se 60% dos seus clientes são Promotores e 10% são Detratores, seu NPS seria 50 (60% - 10%). Os Passivos são incluídos no cálculo do percentual total de respondentes, mas não afetam diretamente o score final. Um NPS positivo é geralmente considerado bom, e um score acima de 50 é excelente.\n\nEsta métrica oferece uma visão clara da saúde do seu relacionamento com o cliente e do potencial de crescimento orgânico através de indicações.",
+            "timestamp": 1770730343206
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 990,
+              "cost": 0.00037125
+            },
+            "timestamp": 1770730343206
+          }
+        ]
+      },
+      {
+        "testId": "data-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730343232,
+            "completedAt": 1770730343233,
+            "durationMs": 1
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730343235,
+            "completedAt": 1770730343237,
+            "durationMs": 2
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730343239,
+            "completedAt": 1770730343240,
+            "durationMs": 1
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730343241,
+            "completedAt": 1770730344820,
+            "durationMs": 1579
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730344822,
+            "completedAt": 1770730344826,
+            "durationMs": 4
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730344827,
+            "completedAt": 1770730346609,
+            "durationMs": 1782
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730343232
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730343233
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730343235
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730343237
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730343239
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730343240
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730343241
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "data_query",
+              "confidence": 0.95,
+              "complexity": "simple"
+            },
+            "timestamp": 1770730344820
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730344822
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 1
+            },
+            "timestamp": 1770730344826
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730344827
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Você não executou nenhuma simulação no último mês.",
+            "timestamp": 1770730346609
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 667,
+              "cost": 0.000250125
+            },
+            "timestamp": 1770730346609
+          }
+        ]
+      },
+      {
+        "testId": "trend-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730346620,
+            "completedAt": 1770730346620,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730346621,
+            "completedAt": 1770730346621,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730346622,
+            "completedAt": 1770730346622,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730346623,
+            "completedAt": 1770730348104,
+            "durationMs": 1481
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730348105,
+            "completedAt": 1770730348109,
+            "durationMs": 4
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730348110,
+            "completedAt": 1770730350252,
+            "durationMs": 2142
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730346620
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730346620
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730346621
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "action_verb"
+            },
+            "timestamp": 1770730346621
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730346622
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "bypassReason": "data_follow_up"
+            },
+            "timestamp": 1770730346622
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730346623
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.95,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730348104
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730348105
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730348109
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730348110
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível encontrar dados para a tendência de pontuação de clareza nos últimos 30 dias. A base de dados retornou um conjunto de dados vazio para este período.",
+            "timestamp": 1770730350252
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 724,
+              "cost": 0.00027150000000000004
+            },
+            "timestamp": 1770730350252
+          }
+        ]
+      },
+      {
+        "testId": "comparison-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730350266,
+            "completedAt": 1770730350267,
+            "durationMs": 1
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730350268,
+            "completedAt": 1770730350268,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730350269,
+            "completedAt": 1770730350269,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730350271,
+            "completedAt": 1770730352220,
+            "durationMs": 1949
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730352222,
+            "completedAt": 1770730352225,
+            "durationMs": 3
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730352226,
+            "completedAt": 1770730354820,
+            "durationMs": 2594
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730350266
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730350267
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730350268
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730350268
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730350269
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730350269
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730350271
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "data_query",
+              "confidence": 0.9,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730352220
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730352222
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730352225
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730352226
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível determinar qual das suas simulações recentes teve a pontuação de clareza mais alta, pois não encontramos dados de pontuação de clareza para o período recente. O sistema indica que não há registros de pontuações de clareza disponíveis.",
+            "timestamp": 1770730354820
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 754,
+              "cost": 0.00028275
+            },
+            "timestamp": 1770730354820
+          }
+        ]
+      },
+      {
+        "testId": "followup-001-a",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "small_talk"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730354830,
+            "completedAt": 1770730354830,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730354832,
+            "completedAt": 1770730354832,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730354833,
+            "completedAt": 1770730354833,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730354835,
+            "completedAt": 1770730354835,
+            "durationMs": 0
+          },
+          {
+            "agent": "small_talk",
+            "startedAt": 1770730354837,
+            "completedAt": 1770730354837,
+            "durationMs": 0
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730354830
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730354830
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730354832
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730354832
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730354833
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "bypassReason": "data_follow_up"
+            },
+            "timestamp": 1770730354833
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730354835
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "small_talk",
+              "confidence": 0.99,
+              "complexity": "simple"
+            },
+            "timestamp": 1770730354835
+          },
+          {
+            "type": "agent_start",
+            "agent": "small_talk",
+            "data": null,
+            "message": "Thinking of a response...",
+            "timestamp": 1770730354837
+          },
+          {
+            "type": "agent_complete",
+            "agent": "small_talk",
+            "data": {
+              "success": true
+            },
+            "timestamp": 1770730354837
+          }
+        ]
+      },
+      {
+        "testId": "followup-001-b",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730356331,
+            "completedAt": 1770730356331,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730356332,
+            "completedAt": 1770730356332,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730356333,
+            "completedAt": 1770730356333,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730356334,
+            "completedAt": 1770730358752,
+            "durationMs": 2418
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730358753,
+            "completedAt": 1770730358756,
+            "durationMs": 3
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730358757,
+            "completedAt": 1770730361405,
+            "durationMs": 2648
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730356331
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730356331
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730356332
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730356332
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730356333
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730356333
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730356334
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.9,
+              "complexity": "complex"
+            },
+            "timestamp": 1770730358752
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730358753
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730358756
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730358757
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível analisar o motivo do bom desempenho do item \"first_one\" porque os dados históricos dos últimos 30 dias estão vazios. Para fornecer uma análise detalhada, preciso de informações sobre as métricas de desempenho (por exemplo, vendas, cliques, conversões) e quaisquer fatores contextuais relevantes para esse item.",
+            "timestamp": 1770730361405
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 736,
+              "cost": 0.000276
+            },
+            "timestamp": 1770730361405
+          }
+        ]
+      },
+      {
+        "testId": "ambiguous-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730361415,
+            "completedAt": 1770730361415,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730361416,
+            "completedAt": 1770730361416,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730361417,
+            "completedAt": 1770730361417,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730361419,
+            "completedAt": 1770730362603,
+            "durationMs": 1184
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730362604,
+            "completedAt": 1770730364306,
+            "durationMs": 1702
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730361415
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730361415
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730361416
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "reference"
+            },
+            "timestamp": 1770730361416
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730361417
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730361417
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730361419
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "general",
+              "confidence": 0.85,
+              "complexity": "simple"
+            },
+            "timestamp": 1770730362603
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730362604
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Para que eu possa te ajudar, preciso de mais informações. Você poderia me dizer a que você se refere com \"isso\"?",
+            "timestamp": 1770730364306
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 637,
+              "cost": 0.000238875
+            },
+            "timestamp": 1770730364306
+          }
+        ]
+      },
+      {
+        "testId": "gen-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730364320,
+            "completedAt": 1770730364320,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730364321,
+            "completedAt": 1770730364321,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730364322,
+            "completedAt": 1770730364322,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730364324,
+            "completedAt": 1770730364324,
+            "durationMs": 0
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730364325,
+            "completedAt": 1770730364327,
+            "durationMs": 2
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730364328,
+            "completedAt": 1770730367228,
+            "durationMs": 2900
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730364320
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730364320
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730364321
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730364321
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730364322
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730364322
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730364324
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.9,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730364324
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730364325
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730364327
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730364328
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não consegui encontrar os dados da \"melhor cópia de simulação\" para usar como base para o seu post no LinkedIn. Os dados históricos disponíveis para os últimos 30 dias estão vazios.\n\nPor favor, forneça a cópia específica que gostaria de usar para o anúncio do novo recurso, ou me diga onde posso encontrá-la, para que eu possa ajudá-lo a elaborar o post.",
+            "timestamp": 1770730367228
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 738,
+              "cost": 0.00027675000000000003
+            },
+            "timestamp": 1770730367228
+          }
+        ]
+      },
+      {
+        "testId": "strat-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730367237,
+            "completedAt": 1770730367238,
+            "durationMs": 1
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730367239,
+            "completedAt": 1770730367239,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730367240,
+            "completedAt": 1770730367240,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730367241,
+            "completedAt": 1770730368413,
+            "durationMs": 1172
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730368414,
+            "completedAt": 1770730368416,
+            "durationMs": 2
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730368417,
+            "completedAt": 1770730370541,
+            "durationMs": 2124
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730367237
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730367238
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730367239
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730367239
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730367240
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730367240
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730367241
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.92,
+              "complexity": "complex"
+            },
+            "timestamp": 1770730368413
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730368414
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730368416
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730368417
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível identificar o maior risco na sua comunicação atual com base nas simulações recentes, pois os dados correspondentes não foram encontrados. Para realizar esta análise, preciso de acesso aos resultados das suas simulações de risco de mensagens.",
+            "timestamp": 1770730370541
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 729,
+              "cost": 0.000273375
+            },
+            "timestamp": 1770730370541
+          }
+        ]
+      },
+      {
+        "testId": "market-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730370549,
+            "completedAt": 1770730370549,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730370550,
+            "completedAt": 1770730370550,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730370551,
+            "completedAt": 1770730370551,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730370552,
+            "completedAt": 1770730370552,
+            "durationMs": 0
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730370553,
+            "completedAt": 1770730370895,
+            "durationMs": 342
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730370896,
+            "completedAt": 1770730370897,
+            "durationMs": 1
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730370549
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730370549
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730370550
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730370550
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730370551
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730370551
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730370552
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "research",
+              "confidence": 0.9,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730370552
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730370553
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 0,
+              "queryCount": 0
+            },
+            "timestamp": 1770730370895
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730370896
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "I could not find enough verifiable external sources (for example, arXiv/DOI) to answer safely right now. I can retry with a narrower topic, timeframe, or search terms.",
+            "timestamp": 1770730370897
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "no_data_fallback",
+              "tokensUsed": 0,
+              "cost": 0
+            },
+            "timestamp": 1770730370897
+          }
+        ]
+      },
+      {
+        "testId": "seg-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730372052,
+            "completedAt": 1770730372053,
+            "durationMs": 1
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730372053,
+            "completedAt": 1770730372054,
+            "durationMs": 1
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730372055,
+            "completedAt": 1770730372055,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730372056,
+            "completedAt": 1770730376225,
+            "durationMs": 4169
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730376226,
+            "completedAt": 1770730376229,
+            "durationMs": 3
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730376229,
+            "completedAt": 1770730380587,
+            "durationMs": 4358
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730372052
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730372053
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730372053
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730372054
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730372055
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730372055
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730372056
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.95,
+              "complexity": "complex"
+            },
+            "timestamp": 1770730376225
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730376226
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730376229
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730376229
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível identificar qual segmento de persona está demonstrando mais confusão com a página de preços, pois os dados históricos dos últimos 30 dias estão vazios. Para realizar essa análise, precisamos de dados de interação dos usuários com a página de preços que indiquem sinais de confusão (por exemplo, tempo excessivo na página, múltiplos cliques em FAQs de preço, abandonos de carrinho após visitar a página de preços, ou feedback direto).",
+            "timestamp": 1770730380587
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 821,
+              "cost": 0.000307875
+            },
+            "timestamp": 1770730380587
+          }
+        ]
+      },
+      {
+        "testId": "chart-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730380597,
+            "completedAt": 1770730380597,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730380598,
+            "completedAt": 1770730380598,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730380599,
+            "completedAt": 1770730380599,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730380600,
+            "completedAt": 1770730384496,
+            "durationMs": 3896
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730384497,
+            "completedAt": 1770730384499,
+            "durationMs": 2
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730384500,
+            "completedAt": 1770730386463,
+            "durationMs": 1963
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730380597
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730380597
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730380598
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730380598
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730380599
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "bypassReason": "data_follow_up"
+            },
+            "timestamp": 1770730380599
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730380600
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "analysis",
+              "confidence": 0.9,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730384496
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730384497
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730384499
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730384500
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não foi possível gerar o gráfico de pontuações de confiança da simulação ao longo do tempo, pois não encontramos dados históricos disponíveis para esta métrica. Por favor, verifique se há dados registrados ou se a métrica está configurada corretamente.",
+            "timestamp": 1770730386463
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 742,
+              "cost": 0.00027825
+            },
+            "timestamp": 1770730386463
+          }
+        ]
+      },
+      {
+        "testId": "web-001",
+        "questionSet": "expanded",
+        "agentPath": [
+          "input_guardrails",
+          "context_enrichment",
+          "faq_agent",
+          "intent_classifier",
+          "research",
+          "response"
+        ],
+        "spans": [
+          {
+            "agent": "input_guardrails",
+            "startedAt": 1770730386472,
+            "completedAt": 1770730386472,
+            "durationMs": 0
+          },
+          {
+            "agent": "context_enrichment",
+            "startedAt": 1770730386473,
+            "completedAt": 1770730386473,
+            "durationMs": 0
+          },
+          {
+            "agent": "faq_agent",
+            "startedAt": 1770730386474,
+            "completedAt": 1770730386474,
+            "durationMs": 0
+          },
+          {
+            "agent": "intent_classifier",
+            "startedAt": 1770730386476,
+            "completedAt": 1770730386476,
+            "durationMs": 0
+          },
+          {
+            "agent": "research",
+            "startedAt": 1770730386477,
+            "completedAt": 1770730386599,
+            "durationMs": 122
+          },
+          {
+            "agent": "response",
+            "startedAt": 1770730386600,
+            "completedAt": 1770730390236,
+            "durationMs": 3636
+          }
+        ],
+        "events": [
+          {
+            "type": "agent_start",
+            "agent": "input_guardrails",
+            "data": null,
+            "message": "Checking message security...",
+            "timestamp": 1770730386472
+          },
+          {
+            "type": "agent_complete",
+            "agent": "input_guardrails",
+            "data": {
+              "passed": true
+            },
+            "timestamp": 1770730386472
+          },
+          {
+            "type": "agent_start",
+            "agent": "context_enrichment",
+            "data": null,
+            "message": "Analyzing conversation context...",
+            "timestamp": 1770730386473
+          },
+          {
+            "type": "agent_complete",
+            "agent": "context_enrichment",
+            "data": {
+              "wasEnriched": false,
+              "enrichmentType": "none"
+            },
+            "timestamp": 1770730386473
+          },
+          {
+            "type": "agent_start",
+            "agent": "faq_agent",
+            "data": null,
+            "message": "Consulting internal documentation...",
+            "timestamp": 1770730386474
+          },
+          {
+            "type": "agent_complete",
+            "agent": "faq_agent",
+            "data": {
+              "handled": false,
+              "confidence": 0
+            },
+            "timestamp": 1770730386474
+          },
+          {
+            "type": "agent_start",
+            "agent": "intent_classifier",
+            "data": null,
+            "message": "Identifying your intent...",
+            "timestamp": 1770730386476
+          },
+          {
+            "type": "agent_complete",
+            "agent": "intent_classifier",
+            "data": {
+              "intent": "research",
+              "confidence": 0.9,
+              "complexity": "medium"
+            },
+            "timestamp": 1770730386476
+          },
+          {
+            "type": "agent_start",
+            "agent": "research",
+            "data": null,
+            "message": "Performing external research and technical analysis...",
+            "timestamp": 1770730386477
+          },
+          {
+            "type": "agent_complete",
+            "agent": "research",
+            "data": {
+              "dataCount": 1,
+              "queryCount": 0
+            },
+            "timestamp": 1770730386599
+          },
+          {
+            "type": "agent_start",
+            "agent": "response",
+            "data": null,
+            "message": "Formulating the final response...",
+            "timestamp": 1770730386600
+          },
+          {
+            "type": "token",
+            "agent": "response",
+            "data": "Não consegui encontrar dados específicos sobre benchmarks de taxas de abertura de e-mail marketing para 2025 na pesquisa realizada. O resultado obtido refere-se a um estudo sobre previsão de preços de ações usando deep learning, o que não está relacionado à sua consulta.\n\nSources: http://arxiv.org/abs/2407.01572v1 | http://arxiv.org/abs/1704.06910v1 | http://arxiv.org/abs/2207.01558v1",
+            "timestamp": 1770730390236
+          },
+          {
+            "type": "agent_complete",
+            "agent": "response",
+            "data": {
+              "modelUsed": "gemini-2.5-flash",
+              "tokensUsed": 945,
+              "cost": 0.000354375
+            },
+            "timestamp": 1770730390236
+          }
+        ]
+      }
+    ]
+  }
+}

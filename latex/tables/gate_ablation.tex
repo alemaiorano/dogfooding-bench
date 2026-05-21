@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\caption{Gate ablation analysis across 38 runs with the consolidated 5D gate. Severe-promoted counts indicate missed critical failures (lower is better).}
+\label{tab:gate_ablation}
+\begin{tabular}{p{1.7cm}rrrr}
+\toprule
+\textbf{Scenario} & \textbf{Promote} & \textbf{Hold} & \textbf{Rollback} & \textbf{Sev.} \\
+\midrule
+Full 5D Gate & 36 & 0 & 2 & 0 \\
+No Evidence Coverage & 38 & 0 & 0 & 2 \\
+No Safety Dimension & 36 & 0 & 2 & 0 \\
+Task Success + Latency Only & 38 & 0 & 0 & 2 \\
+Traditional CI only (no behavioral gate) & 38 & 0 & 0 & 2 \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table}

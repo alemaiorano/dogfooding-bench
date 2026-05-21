@@ -1,0 +1,14 @@
+HUMAN CALIBRATION STUDY — ALIGNMENT REPORT
+==================================================
+Sample size: 60 cases (stratified: 20 failed + 40 passed)
+
+Human Evaluator 1 vs 2: N=60, Agreement=83.3\%, κ=0.359 (fair)
+LLM Judge vs System Gate: N=60, Agreement=63.3\%, κ=0.132 (slight)
+Human 1 vs System Gate: N=60, Agreement=66.7\%, κ=0.167 (slight)
+Human 2 vs System Gate: N=60, Agreement=63.3\%, κ=0.000 (slight)
+LLM Judge vs Human 1: N=60, Agreement=80.0\%, κ=0.444 (moderate)
+LLM Judge vs Human 2: N=60, Agreement=73.3\%, κ=0.149 (slight)
+
+LLM Judge vs System Gate disagreement breakdown:
+  False negatives (LLM rejects, system accepts): 9
+  False positives (LLM accepts, system rejects): 13

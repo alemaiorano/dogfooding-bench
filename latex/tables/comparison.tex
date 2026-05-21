@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Complementary coverage: traditional testing vs.\ automated self-testing.}
+\label{tab:comparison}
+\begin{tabular}{p{3.5cm}ccc}
+\toprule
+\textbf{Aspect} & \textbf{U/I} & \textbf{E2E} & \textbf{Self-Test} \\
+\midrule
+Deterministic logic & \checkmark & \checkmark & -- \\
+API contracts & \checkmark & \checkmark & -- \\
+UI flow validation & -- & \checkmark & -- \\
+Hallucination detection & -- & -- & \checkmark \\
+Context preservation & -- & -- & \checkmark \\
+Safety alignment & -- & -- & \checkmark \\
+Evidence citation & -- & -- & \checkmark \\
+Latency regression & -- & Partial & \checkmark \\
+Multi-turn coherence & -- & -- & \checkmark \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table}

@@ -1,0 +1,52 @@
+{
+  "scenarioId": "A",
+  "name": "Standard Marketing Account",
+  "description": "A baseline mock state for a B2B SaaS company using the platform.",
+  "toolMethodology": {
+    "NPS": "the platform calculates a 'Synthetic NPS' based on the ratio of persona 'Aha!' moments vs 'Confusion' signals during copy micro-simulations. Range: -100 to +100.",
+    "ClarityScore": "Weighted average of message comprehension across target personas.",
+    "ConfidenceScore": "Statistical certainty based on the number of simulation iterations (N)."
+  },
+  "accountData": {
+    "user_id": "bench-user",
+    "total_simulations": 12,
+    "last_month_simulations": 5,
+    "total_personas": 8,
+    "total_projects": 3,
+    "latest_simulations": [
+      {
+        "id": "sim-001",
+        "name": "Q1 Launch - Headline A",
+        "clarityScore": 85,
+        "confidenceScore": 92,
+        "status": "completed",
+        "date": "2026-03-01",
+        "winningCopy": "Stop wasting time on manual outreach.",
+        "insights": "High resonance with Enterprise personas due to efficiency focus."
+      },
+      {
+        "id": "sim-002",
+        "name": "Pricing Page - Redesign",
+        "clarityScore": 62,
+        "confidenceScore": 88,
+        "status": "completed",
+        "date": "2026-03-05",
+        "confusionHeatmap": "Persona 'Product Manager' is confused about the 'Scale' tier pricing.",
+        "risk": "Ambiguous value proposition for mid-market."
+      },
+      {
+        "id": "sim-003",
+        "name": "Brand Refresh - Tagline",
+        "clarityScore": 78,
+        "confidenceScore": 95,
+        "status": "completed",
+        "date": "2026-03-10"
+      }
+    ],
+    "personaSegments": [
+      { "id": "pm", "name": "Product Manager", "active": true },
+      { "id": "gm", "name": "Growth Marketer", "active": true },
+      { "id": "md", "name": "Marketing Director", "active": true }
+    ]
+  }
+}

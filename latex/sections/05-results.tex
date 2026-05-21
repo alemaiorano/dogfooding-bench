@@ -1,0 +1,76 @@
+\section{Results}
+\label{sec:results}
+
+Our longitudinal evaluation generated 38 distinct execution traces across a four-week period. We present the findings organized by our three research questions, supported by statistical analysis (Mann-Kendall trend tests, Spearman correlations, and bootstrap confidence intervals).
+
+\subsection{RQ1: Effectiveness of the Quality Gate}
+The framework proved effective at enforcing release discipline. Of 38 evaluation runs, 36 received a PROMOTE decision and 2 were flagged as ROLLBACK (Table~\ref{tab:decision_log}). The two ROLLBACK decisions occurred during Run 1 and Run 2 (the first two evaluations in the longitudinal series), where evidence coverage dropped to 50\%---well below the 56\% ROLLBACK threshold (70\% of the 80\% target). This early detection prevented a build with inadequate citation behavior from being promoted in the staging gate.
+
+While unit and integration tests confirmed API contracts and logic flow, the persona-grounded and multi-turn question bank evaluation isolated contextual errors that escaped traditional CI: hallucinating non-existent features, losing conversational context across multi-turn interactions, and providing unsupported claims without evidence citations. In practice, this pre-production simulation of customer-like usage accelerated iteration by exposing high-impact conversational failures earlier in the cycle. Beyond pre-production evaluation, the gate's structured feedback---particularly per-category issue labels and failure traces---also guided iterative agent development itself, directing engineering effort toward the specific error classes (e.g., hallucination, evidence gaps) that the gate surfaced across runs.
+
+Over the four-week evaluation spanning 20+ internal releases, no promoted build subsequently triggered a rollback in later runs, indicating stable post-promote behavior under the gate's criteria.
+
+\input{tables/decision_log}
+
+\subsection{RQ1.1: Ablation Against Simplified Gates}
+To estimate the practical value of each gate dimension, we ran an offline ablation over the same 38 runs (Table~\ref{tab:gate_ablation}). Removing evidence coverage from the decision logic would have promoted both severe failures that the full gate correctly rolled back. In contrast, the full five-dimension gate promoted zero severe-failure runs. A ``traditional CI only'' baseline (without behavioral gate) would have promoted all runs, including severe failures.
+
+\input{tables/gate_ablation}
+
+\subsection{RQ2: Predictive Dimensions of Quality}
+
+\input{tables/correlations}
+
+Spearman rank correlation analysis (Table~\ref{tab:correlations}) reveals the inter-dimensional structure of the consolidated five-dimension gate:
+\begin{itemize}
+    \item \textbf{Task Success Rate and P95 Latency} show moderate negative correlation ($\rho = -0.47$), indicating that slower responses tend to accompany lower quality, consistent with multi-agent timeout and retry failures degrading both dimensions simultaneously.
+    \item \textbf{Evidence Coverage} was responsible for both ROLLBACK decisions (50\% vs.\ 80\% threshold), making it the most actionable predictor of severe regression. Correlation analysis therefore reinforces that citation-grounding failures, not the consolidated task-success construct, were the main severe-failure driver in this dataset.
+    \item \textbf{Safety Pass Rate} remained consistently high ($\mu = 97.1\%$, 95\% CI $[96.8, 97.4]$) but showed no significant trend, serving as a stable baseline constraint.
+    \item \textbf{Research Context Preservation} was excluded from correlation analysis because it remained constant at 100\% across all 38 runs under the deterministic context-enrichment pipeline. In this dataset it has no discriminative power, but it remains useful as a regression sentinel for future pipeline changes.
+\end{itemize}
+
+Bootstrap confidence intervals are reported in Table~\ref{tab:confidence_intervals} to contextualize central-tendency estimates with sampling uncertainty.
+\input{tables/confidence_intervals}
+
+\subsection{RQ3: Evolution of Metrics Across Releases}
+
+Mann-Kendall trend analysis (Table~\ref{tab:mann_kendall}) revealed patterns that differ from naive expectations. Figures~\ref{fig:success_rate} and~\ref{fig:latency_distribution} show the task-success and latency trajectories, while Figure~\ref{fig:quality_evolution} provides a consolidated view of all five gate dimensions over time:
+
+\begin{enumerate}
+    \item \textbf{Task Success Rate shows a statistically significant decreasing trend} ($\tau = -0.320$, $p = 0.004$). Rather than indicating system degradation, this reflects the \textit{increasing difficulty of the test suite}: as the question bank grew from 59 to 133 scenarios---adding adversarial, hallucination, and complex orchestration tests---the system faced progressively harder evaluations. Despite this, the rate never dropped below 91.5\% (well above the 80\% threshold), demonstrating robust quality under escalating challenge.
+    \item \textbf{P95 Latency shows a significant increasing trend} ($\tau = 0.374$, $p = 0.001$), explained by the growing question bank size and increasing complexity of test scenarios. All runs remained below the 15{,}000\,ms threshold.
+    \item \textbf{Safety Pass Rate and Evidence Coverage show no significant trend}, indicating stable performance on these critical dimensions despite system changes.
+\end{enumerate}
+
+\input{tables/mann_kendall}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/success_rate.pdf}
+\caption{Success rate across 38 evaluation runs. Green markers indicate PROMOTE decisions; red markers indicate ROLLBACK. The dashed line marks the 80\% acceptance threshold.}
+\label{fig:success_rate}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/latency_distribution.pdf}
+\caption{Distribution of P95 latency by suite phase labels (D13, C59, C86-88, C106, C133). The increasing trend ($\tau = 0.374$) correlates with growing test-suite complexity.}
+\label{fig:latency_distribution}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/quality_evolution.pdf}
+\caption{Joint evolution of the five gate dimensions across 38 evaluation runs. Task success trend reflects increasing test-suite difficulty; evidence coverage isolates severe regressions; latency growth tracks suite expansion while remaining under threshold.}
+\label{fig:quality_evolution}
+\end{figure*}
+
+Table~\ref{tab:descriptive} reports descriptive statistics across all runs, complementing the trend and correlation analyses.
+\input{tables/descriptive_stats}
+
+\subsection{Operational Overhead and Scalability}
+Beyond quality outcomes, we measured the runtime overhead of the gate itself (Table~\ref{tab:overhead_scaling}). Due to the asymmetric, long-tail distribution typical of LLM generation, median durations provide a more robust metric. The median run duration was approximately 407.3 seconds (min 59.4s, max 801.4s), with a median of 4{,}661.0ms per evaluated test. The relationship between suite size and runtime is strongly linear (Pearson $r=0.92$), with an estimated slope of approximately +6.0 seconds per additional test. This indicates predictable scaling behavior for release planning and CI capacity provisioning.
+
+\input{tables/overhead_scaling}
+
+These patterns demonstrate the value of treating LLM development as an iterative, empirical process governed by strict quantitative gates, while highlighting that trend interpretation must account for evolving test difficulty.

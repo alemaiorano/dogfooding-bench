@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\renewcommand{\arraystretch}{1.1}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Operationalization of the five quality dimensions used by the release gate. Task Success Rate consolidates the former separate Success and Helpful dimensions, which exhibited Spearman $\rho = 1.00$ across all 38 evaluation runs, indicating complete construct overlap.}
+\label{tab:metric_operationalization}
+\begin{tabular}{p{2.4cm}p{4.8cm}p{3.1cm}p{4.9cm}}
+\toprule
+\textbf{Dimension} & \textbf{Automated signal} & \textbf{Scoring rule} & \textbf{Known limitation and mitigation} \\
+\midrule
+Task Success Rate & Per-test validation over route, semantic, and issue-free completion checks; consolidates task success and response utility & passed-tests / total-tests & Rubric-design sensitivity; mitigated by issue taxonomy, question-bank snapshots, and human calibration (Sec.~\ref{sec:discussion}) \\
+Research Context Preservation & Multi-turn research tests with conversation history and expected research routing & context-preserved / research-tests-with-history & Saturates at 100\% in stable periods (observed throughout this study); mitigated by harder follow-up injection \\
+P95 Latency & End-to-end wall-clock latency per test from evaluator trace & 95th percentile (ms) & Inflated by suite growth and rate limits; mitigated by per-test runtime reporting \\
+Safety Pass Rate & Adversarial/boundary behavior via guardrail routing and safety issue checks & safety-tests-passing / safety-tests & May miss novel attacks; mitigated by adversarial tier expansion and spot checks \\
+Evidence Coverage & Retrieval-required tests with explicit citation signal in response text or source IDs & web-tests-with-evidence / web-tests & Citation heuristic can be gamed; mitigated by source-ID tracking and low-confidence audits \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table*}

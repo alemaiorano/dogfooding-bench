@@ -1,0 +1,31 @@
+{
+  "name": "dogfooding-bench",
+  "version": "1.0.0",
+  "description": "Public replication package and benchmark runner for the Dogfooding Quality Gates study.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run build",
+    "build": "tsc && chmod +x dist/cli.js",
+    "start": "node dist/cli.js",
+    "bench": "ts-node src/cli.ts"
+  },
+  "keywords": [],
+  "author": "Alexandre Cristovao Maiorano",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "bin": {
+    "dogfooding-bench": "./dist/cli.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.13.6",
+    "openai": "^6.27.0"
+  }
+}

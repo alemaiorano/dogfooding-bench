@@ -1,0 +1,44 @@
+\section{Background and Related Work}
+\label{sec:related-work}
+
+This section reviews the evolution of quality assurance practices from traditional deterministic software systems to modern non-deterministic LLM-powered applications, and explores how self-testing practices have been adapted to serve as automated quality gates.
+
+\subsection{Testing Traditional vs. LLM Applications}
+Traditional software engineering relies heavily on deterministic testing methodologies, such as unit, integration, and end-to-end (E2E) testing \cite{wohlin2012experimentation}. These approaches assume that given a specific input, the system will consistently produce a specific, predictable output. However, testing LLM applications introduces a paradigm shift due to their probabilistic nature. Dobslaw and Feldt \cite{dobslaw2025testing} present a faceted taxonomy of challenges in testing LLM-based software, emphasizing that LLMs are prone to hallucinations, reasoning errors, and context sensitivity, making strict deterministic assertions nearly impossible.
+
+Recent efforts in behavioral testing for NLP models, such as the CheckList framework by Ribeiro et al.~\cite{ribeiro2020beyond}, introduced the concept of testing linguistic capabilities via input perturbations. While CheckList works well for isolated NLP tasks (e.g., sentiment analysis), production LLM applications---like multi-agent orchestrators \cite{wu2024autogen, hong2024metagpt}---require evaluating the entire conversational pipeline, including context retrieval, tool use, and safety alignment.
+
+Holistic benchmarking suites such as HELM \cite{liang2023helm}, MMLU \cite{hendrycks2021mmlu}, and BIG-bench \cite{srivastava2023bigbench} have advanced the field by evaluating models across diverse tasks. MT-Bench and Chatbot Arena \cite{zheng2023judging} specifically address LLM-judge evaluation for open-ended conversation. However, these benchmarks focus on model-level capabilities rather than application-level quality gates for production deployment.
+
+\subsection{Automated Evaluation of LLMs}
+To overcome the limitations of human evaluation, which is costly and difficult to scale~\cite{nushi2017human}, the industry has adopted automated evaluation techniques. A prominent approach is ``LLM-as-a-Judge,'' where a capable reasoning model evaluates the outputs of the system under test against a rubric \cite{zheng2023judging}. While this accelerates iteration cycles, Shankar et al. \cite{shankar2024who} argue that automated evaluators themselves require rigorous alignment and can introduce systemic biases.
+
+The ML Test Score rubric proposed by Breck et al.~\cite{breck2017mltest} provides a framework for assessing ML production readiness, but focuses on traditional ML systems rather than the unique challenges of generative AI. Sculley et al. \cite{sculley2015debt} highlight the hidden technical debt in ML systems, including monitoring and testing debt, which becomes even more pronounced in LLM applications. Amershi et al. \cite{amershi2019se4ml} document nine stages of the ML workflow at Microsoft, noting that testing and monitoring remain the least mature practices.
+
+In contrast to isolated benchmarking, evaluating production systems requires addressing the real-world usage distribution. Our framework builds upon automated evaluation but integrates it directly into the release pipeline as a strict quality gate, rather than an offline benchmarking tool.
+This emphasis is complementary to broader release-readiness harnesses that combine evaluation, observability, and CI gating across heterogeneous LLM/RAG scenarios \cite{maiorano2026readiness}. Relative to that broader framing, the present work narrows the scope to automated self-testing as a longitudinal release-control mechanism for a single deployed multi-agent system.
+
+\subsection{Continuous Delivery and Quality Gates}
+Quality gates serve as decision checkpoints in software delivery pipelines~\cite{schermann2016qualitygates, shahin2017cicd}. Shahin et al. \cite{shahin2017cicd} provide a comprehensive review of continuous integration, delivery, and deployment practices, noting that automated quality gates are essential for maintaining release velocity without sacrificing quality. Metamorphic testing \cite{segura2016metamorphic} offers a complementary approach for systems where oracles are difficult to define---a property shared by LLM applications.
+
+\subsection{Safety and Alignment of LLM Systems}
+The safety dimension of our quality gate framework draws on recent work in LLM safety. Red teaming methodologies~\cite{ganguli2022redteaming, perez2022redteaming} have established systematic approaches for discovering harmful behaviors. Constitutional AI \cite{bai2022constitutional} and RLHF \cite{ouyang2022instructgpt} provide training-time alignment, but production systems still require runtime safety evaluation. Greshake et al. \cite{greshake2023injection} demonstrate that indirect prompt injection poses a significant threat to LLM-integrated applications, motivating the adversarial test tier in our question bank.
+
+\subsection{Dogfooding in Software Engineering}
+``Dogfooding''---the practice of an organization using its own product---has long been an informal mechanism for discovering usability issues and bugs before public release~\cite{harrison2006dogfooding}. Feitelson et al. \cite{feitelson2013facebook} describe how Facebook's deployment process relies on internal staging environments (H1/H2 servers) for gradual rollout, while Rossi et al. \cite{rossi2016facebook} explicitly document that ``dog-fooding and obtaining feedback from alpha and beta customers is critical to maintaining release quality'' in their study of Facebook's mobile deployment pipeline.
+
+In traditional contexts, dogfooding is largely treated as a qualitative beta-testing phase. For LLM applications, automated self-testing provides a continuous stream of realistic conversational traces that can be codified into regression tests. Our work formalizes this practice into a quantifiable \textit{Quality Gate} framework following established case study methodology \cite{runeson2009guidelines, basili1994gqm}, closing the gap between internal testing and automated release decisions.
+
+\subsection{Concurrent Automated Testing Frameworks}
+\label{sec:concurrent}
+
+Two concurrent works address related but distinct aspects of LLM application testing. STELLAR \cite{sorokin2026stellar} proposes a search-based framework that systematically generates failure-inducing inputs by discretizing linguistic and semantic feature dimensions (content, style, and perturbation). Applied to safety-critical (SafeQA) and retrieval-augmented (NaviQA) settings, STELLAR consistently uncovers more failing inputs than random, combinatorial, or coverage-based baselines. However, STELLAR's primary contribution is \emph{test input generation and failure discovery}; it does not formalize multi-dimensional quality gates or deterministic release decisions, and its evaluation is conducted offline rather than embedded in a CI/CD pipeline.
+
+Multi-Agent LLM Committees \cite{karanam2025committees} orchestrate a committee of LLM agents using a three-round voting protocol to achieve consensus in autonomous beta testing. Evaluated across 84 runs with 9 distinct testing personas, the committee achieves an F1 score of 0.91 for regression detection versus 0.78 for single-agent baselines. Their focus is \emph{collaborative bug detection via committee consensus}, not the operationalization of release readiness across orthogonal quality dimensions such as evidence coverage or safety pass rate.
+
+Our framework is distinguished from both by (i) formalizing five empirically grounded quality dimensions into a deterministic PROMOTE/HOLD/ROLLBACK gate, (ii) embedding the gate natively in a CI/CD workflow triggered on every merge, and (iii) empirically demonstrating the unique role of evidence coverage as a severe-regression discriminator across 38 longitudinal runs---a construct neither concurrent work addresses. Table~\ref{tab:concurrent_comparison} summarizes the key differences.
+
+\input{tables/concurrent_comparison}
+
+In the next section, we detail the architecture of this framework and the specific quality dimensions employed.
+

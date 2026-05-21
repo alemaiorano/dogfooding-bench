@@ -1,0 +1,173 @@
+\section{The Automated Self-Testing Quality Gate Framework}
+\label{sec:framework}
+
+To address the limitations of traditional testing in non-deterministic LLM applications, we introduce a systematized framework that leverages automated self-testing as an embedded \textit{Quality Gate}. The framework operates as a continuous evaluation loop that intercepts development builds before deployment, subjecting them to quantitative and qualitative scrutiny based on historical and engineered trace data.
+
+\subsection{Framework Architecture}
+The core of our approach is an evaluation engine that executes a static and evolving ``question bank'' against the live candidate build. This question bank is curated from real dogfooding traces, edge cases discovered in staging/internal runs, and adversarial queries constructed by the development team.
+
+The evaluation script simulates user interactions, capturing the complete agent execution path (LangGraph state machine trace), the generated LLM responses, and the corresponding performance metadata.
+
+Figure~\ref{fig:architecture} shows the high-level interaction between the question bank and the orchestrator, while Figure~\ref{fig:cicd_integration} depicts the full CI/CD integration pipeline, from code commit to release decision.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[node distance=2cm, auto,
+  block/.style={rectangle, draw, fill=blue!10, text width=6em, text centered, rounded corners, minimum height=3em},
+  line/.style={draw, -latex'}]
+
+  \node [block] (bank) {Curated \\ Question Bank};
+  \node [block, right of=bank, node distance=3.5cm] (eval) {Evaluation \\ Engine};
+  \node [block, right of=eval, node distance=3.5cm] (agent) {LLM \\ Orchestrator};
+  \node [block, below of=eval, node distance=2.5cm] (metrics) {Metrics \& \\ Decision Log};
+
+  \path [line] (bank) -- node {Inputs} (eval);
+  \path [line] (eval) edge[bend left] node {Queries} (agent);
+  \path [line] (agent) edge[bend left] node {Traces} (eval);
+  \path [line] (eval) -- node {Analytics} (metrics);
+\end{tikzpicture}%
+}
+\caption{High-level interaction between the static/dynamic Question Bank and the multi-agent LLM orchestrator during evaluation.}
+\label{fig:architecture}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  %% Explicit x-spacing between pipeline nodes
+  pipe/.style={rectangle, draw, fill=blue!10, text width=6em, text centered,
+               rounded corners, minimum height=2.6em, font=\small},
+  trig/.style={pipe, fill=orange!20},
+  resbox/.style={rectangle, draw, text width=7em, text centered,
+                 rounded corners, minimum height=2.6em, font=\small},
+  gatestyle/.style={diamond, draw, fill=yellow!20, text width=4.2em,
+                    text centered, font=\small, aspect=2.2},
+  line/.style={draw, -latex', thick},
+  lbl/.style={font=\footnotesize, fill=white, inner sep=1pt}]
+
+  %% ---- Pipeline row at y=0, explicit x positions ----
+  \node [trig] at (0,0)    (merge)   {Merge\\to main};
+  \node [pipe] at (2.5,0)  (checkout){Checkout\\build};
+  \node [pipe] at (5.0,0)  (load)    {Load\\question bank};
+  \node [pipe] at (7.5,0)  (exec)    {Execute\\test suite};
+  \node [pipe] at (10.0,0) (collect) {Collect\\OTel traces};
+  \node [pipe] at (12.5,0) (compute) {Compute\\5D metrics};
+  \node [gatestyle] at (15.3,0) (gated) {Gate\\decision};
+
+  %% ---- Outcomes row at y=-4.0, explicit x positions ----
+  \node [resbox, fill=green!15]  at (11.8,-4.0) (promote)
+        {\textbf{PROMOTE}\\[1pt]\checkmark~Deploy};
+  \node [resbox, fill=yellow!30] at (15.3,-4.0) (hold)
+        {\textbf{HOLD}\\[1pt]Manual triage};
+  \node [resbox, fill=red!15]    at (18.8,-4.0) (rollback)
+        {\textbf{ROLLBACK}\\[1pt]Block deploy};
+
+  %% ---- Expand QB below HOLD ----
+  \node [pipe] at (15.3,-7.0) (expand) {Expand\\question bank};
+
+  %% ---- Pipeline edges ----
+  \path [line] (merge)    -- (checkout);
+  \path [line] (checkout) -- (load);
+  \path [line] (load)     -- (exec);
+  \path [line] (exec)     -- (collect);
+  \path [line] (collect)  -- (compute);
+  \path [line] (compute)  -- (gated);
+
+  %% ---- Gate to outcomes: labels near the gate (pos=0.25) ----
+  \path [line] (gated) --
+    node[lbl, pos=0.25, above left]{all pass} (promote);
+  \path [line] (gated) --
+    node[lbl, pos=0.3, right]{warn}           (hold);
+  \path [line] (gated) --
+    node[lbl, pos=0.25, above right]{critical}(rollback);
+
+  %% ---- HOLD straight down to Expand ----
+  \path [line] (hold) -- (expand);
+
+  %% ---- ROLLBACK curves right-and-down to Expand (visible, outside HOLD area) ----
+  \path [line] (rollback.south)
+    to [out=270, in=0, looseness=0.9] (expand.east);
+
+  %% ---- Feedback arc: Expand curves left-and-up back to Load QB ----
+  \path [line, dashed, thick] (expand.west)
+    to [out=180, in=270, looseness=1.1]
+    node[below left, lbl, pos=0.4]{new scenarios}
+    (load.south);
+
+\end{tikzpicture}}
+\caption{CI/CD integration pipeline. A merge to the main branch triggers automated build checkout, question bank loading, full test suite execution with OpenTelemetry trace collection, five-dimensional metric computation, and deterministic gate decision. HOLD and ROLLBACK events feed back into the question bank expansion loop, preventing test suite drift.}
+\label{fig:cicd_integration}
+\end{figure*}
+
+\subsection{Quality Dimensions and Thresholds}
+To provide actionable release decisions, the framework evaluates each build across five measurable dimensions. Thresholds were derived empirically to balance system stability with deployment velocity. During pilot runs, separate \textit{Success Rate} and \textit{Helpfulness Rate} dimensions showed perfect overlap (Spearman $\rho = 1.00$ across 38 runs) due to shared issue-detection logic, so they were merged into a single \textbf{Task Success Rate} construct. The resulting five-dimension gate removes redundant signal while preserving interpretability (see Sections~\ref{sec:results} and~\ref{sec:discussion}):
+
+\begin{itemize}
+    \item \textbf{Task Success Rate (${\ge}$ 80\%):} The percentage of test cases that resolve the user intent without functional failures and produce a substantive, non-trivial response, consolidating task completion and response utility into a single construct.
+    \item \textbf{Research Context Preservation (${\ge}$ 90\%):} The capacity of the system to accurately maintain context across complex, multi-turn research flows.
+    \item \textbf{Latency (P95 $< 15{,}000$\,ms):} The 95th percentile response time must not exceed 15 seconds, ensuring acceptable real-time user UX despite multi-agent orchestration overhead.
+    \item \textbf{Safety Pass Rate (${\ge}$ 95\%):} The percentage of interactions that successfully navigate prompt injections and filter out harmful intents via input guardrails.
+    \item \textbf{Evidence Coverage (${\ge}$ 80\%):} In tasks involving external knowledge retrieval, the response must cite authoritative sources.
+\end{itemize}
+
+\paragraph{Threshold rationale.}
+Each threshold reflects a deliberate trade-off between deployment velocity and quality assurance, derived from operational baselines observed during pre-study dogfooding sessions prior to the formal 4-week evaluation period.
+
+\textit{Task Success Rate ($\ge$80\%)} was set to permit iterative feature development while blocking builds with systemic failures. Pre-study runs established a natural baseline of approximately 92--95\%; the 80\% threshold provides a 12--15 percentage-point safety margin, which proved sufficient to absorb the observed suite-size expansion (Section~\ref{sec:results}) without spurious rollbacks in the 38-run window.
+
+\textit{Research Context Preservation ($\ge$90\%)} is set higher because context loss in multi-turn flows is nearly always user-visible and difficult to recover from mid-session. The deterministic context-enrichment pipeline further justifies a strict threshold---deviations from 100\% in this pipeline signal architectural regressions rather than stochastic failures.
+
+\textit{P95 Latency ($< 15{,}000$\,ms)} reflects the upper bound of acceptable wait time for an interactive marketing analytics assistant. The threshold was set operationally from pre-launch internal testing, where responses exceeding 15 seconds consistently triggered user abandonment in dogfooding sessions; it is loose relative to traditional web-UX response-time guidance but accommodates the multi-agent orchestration overhead inherent to the system under test.
+
+\textit{Safety Pass Rate ($\ge$95\%)} represents a near-zero tolerance for guardrail failures, consistent with responsible AI deployment standards \cite{bai2022constitutional}. The 5\% tolerance accommodates edge-case borderline queries while rejecting systematic guardrail regressions.
+
+\textit{Evidence Coverage ($\ge$80\%)} was set based on the observation that users interpreting marketing analytics data expect cited sources for at least 4 of every 5 retrieval-required claims. Pre-study traces showed natural coverage of 88--95\%; the threshold was calibrated below this baseline to distinguish systemic citation failures (the two ROLLBACK events) from acceptable variance.
+
+\paragraph{ROLLBACK threshold.}
+The critical failure line at 70\% of each target threshold (e.g., $<$56\% for evidence coverage, $<$66.5\% for safety) was derived to separate \textit{systemic failures}---where the feature or subsystem is fundamentally broken---from \textit{marginal underperformance} best resolved by manual triage (HOLD). The ablation analysis in Section~\ref{sec:results} provides implicit sensitivity evidence: removing the evidence coverage dimension entirely would have promoted both severe-failure builds, confirming that the threshold is calibrated at the right discriminative boundary.
+The complete threshold specification used by the gate is summarized in Table~\ref{tab:quality_thresholds}.
+
+\input{tables/quality_thresholds}
+
+\subsection{Operationalization and Automation Protocol}
+Beyond threshold values, each quality dimension is tied to a concrete scoring rule and trace-level signal, summarized in Table~\ref{tab:metric_operationalization}. This makes the gate reproducible across runs and explicit about what is being measured.
+
+\input{tables/metric_operationalization}
+
+At run time, each test case produces a structured record containing route trace, response text, evidence identifiers, and issue labels. Metrics are computed directly from this trace stream: Task Success Rate = issue-free tests/total tests; Research Context Preservation = context-preserved research tests/research tests with history; P95 Latency = 95th percentile end-to-end latency; Safety Pass Rate = passing safety tests/total safety tests; and Evidence Coverage = retrieval-required tests with explicit evidence signal/total retrieval-required tests.
+
+To mitigate evaluator misalignment and automation bias, we apply three safeguards in the pipeline: (i) deterministic checks for route/path and schema-level expectations, (ii) explicit issue taxonomy with auditable failure reasons, and (iii) periodic human-in-the-loop operational review by the analyst team over flagged low-confidence or adversarial outputs. This operational review informs triage and question-bank expansion, but it is distinct from a formal sampled calibration protocol.
+
+For longitudinal comparability, release decisions reported in this study follow the original gate logs from the internal staging workflow. We also export an adversarial-only recomputation of safety as an auxiliary replication artifact.
+
+\subsection{Decision Engine}
+The framework translates the multi-dimensional metrics into a deterministic release decision. The logic operates strictly on the evaluated thresholds:
+
+\begin{itemize}
+    \item \textbf{PROMOTE:} The build passes the quality gate if \textit{all} dimensions meet or exceed their defined thresholds.
+    \item \textbf{ROLLBACK:} If any dimension falls below a critical failure line (e.g., $<70\%$ of its target threshold), the build is immediately rejected.
+    \item \textbf{HOLD:} If metrics fall into a warning zone (e.g., a metric fails the threshold narrowly but no critical failure occurred), the release is held for manual triage by the engineering team.
+\end{itemize}
+
+This evidence-driven approach ensures that behavioral regressions and subtle degradations---such as an increase in hallucination rates disguised as confident answers---are caught deterministically before impacting users. The deterministic decision logic is given in Algorithm~\ref{alg:gate_pipeline}, and the dimensional metric extraction in Algorithm~\ref{alg:metric_extraction} (Appendix~\ref{sec:appendix}).
+Figure~\ref{fig:decision_flowchart} summarizes the release-decision state machine, and Table~\ref{tab:comparison} positions automated self-testing relative to traditional U/I and E2E testing coverage.
+
+\input{figures/decision_flowchart}
+
+\input{tables/comparison}
+
+\subsection{Question Bank Management and Test Suite Evolution}
+\label{sec:qbank_management}
+
+The question bank is a living artifact, not a static fixture. Its evolution strategy is designed to prevent two opposing failure modes: \textit{test drift} (new system behaviors not covered by stale scenarios) and \textit{test overfitting} (scenarios engineered to match known-good system responses, masking genuine regressions).
+
+\paragraph{Expansion triggers.}
+New scenarios are added to the question bank through three channels: (i) \textit{real dogfooding traces}---real internal usage sessions that expose edge cases not previously represented; (ii) \textit{HOLD\slash ROLLBACK post-mortems}---failure modes surfaced by gate decisions are codified into new test scenarios to prevent recurrence; and (iii) \textit{adversarial scenario injection}---deliberately crafted prompts targeting novel attack vectors, hallucination traps, and orchestration failure modes as the system's capability surface expands.
+
+\paragraph{Stratification as anti-overfitting mechanism.}
+The four-tier stratification (core functional, complex orchestration, hallucination traps, adversarial/safety) ensures that new scenarios injected from real traces---which tend to skew toward core functional---are balanced by adversarial and hallucination scenarios. This prevents the question bank from converging toward ``easy'' prompts that the system reliably handles.
+
+\paragraph{Empirical evidence against test suite overfitting.}
+The longitudinal trend analysis reported in Section~\ref{sec:results} is inconsistent with overfitting behavior. As the question bank expanded from 59 to 133 scenarios, Task Success Rate remained above the acceptance threshold while becoming harder to sustain. If scenarios were being engineered to pass, we would expect stable or increasing success rates. This pattern supports the intended role of continuous suite expansion as a pressure mechanism rather than a pass-rate inflation mechanism.

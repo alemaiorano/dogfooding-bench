@@ -1,0 +1,33 @@
+\section{Experimental Setup and Case Study}
+\label{sec:case-study}
+
+To empirically validate the effectiveness of our proposed framework, we conducted a longitudinal single-case study following established software engineering case study guidance \cite{runeson2009guidelines, basili1994gqm}. The subject of our study is an internally deployed pre-production multi-agent conversational AI system (providing marketing analytics and insights).
+
+\subsection{System Under Test: Multi-Agent Conversational AI}
+The system employs a hybrid LangGraph-based architecture orchestrating eight specialized agents (Input Guardrails, Context Enrichment, FAQ, Intent Classifier, Research, Action, Small Talk, and Response). At runtime, natural language queries traverse this state machine, undergoing sequential and parallel processing. The complexity of this system stems from dynamic routing and the dependency on external APIs, yielding a highly non-deterministic output space that is difficult to secure with traditional testing alone.
+
+\subsection{Evaluation Dataset (Question Bank)}
+A robust evaluation requires a stable baseline against which iterative changes can be measured. Our evaluation framework utilizes a curated ``Question Bank'' with two maintained artifacts referenced in the supplementary materials: a core bank (50 prompts) and an expanded bank (83 prompts). To comprehensively stress-test the LLM orchestrator in realistic operating conditions, the dataset is stratified into four operational complexity tiers:
+
+\begin{itemize}
+    \item \textbf{Core Functional Scenarios:} Standard user intents derived from actual dogfooding traces, covering product functionality, workflow fit, return-on-investment (ROI) computations, and persona grounding.
+    \item \textbf{Complex Orchestration and Multi-Turn:} Scenarios requiring the agent to utilize multiple asynchronous tools sequentially (e.g., executing a web search, analyzing internal metrics, and plotting a dynamic chart) while maintaining deep session context across subsequent prompts.
+    \item \textbf{Hallucination \& Error Handling Traps:} Queries intentionally asking for non-existent system features, executing nonsensical math operations, or citing fabricated case studies. These cases explicitly measure the ``faithfulness'' and contextual preservation dimensions.
+    \item \textbf{Adversarial \& Safety Boundaries:} Aggressive prompt injections, personally identifiable information (PII) extraction attempts, out-of-domain pivots, and tone constraints designed specifically to audit the framework's input guardrails.
+\end{itemize}
+
+A critical feature of this evaluation methodology is the \textbf{dynamic evolution of the Question Bank}. Rather than operating strictly on a fixed dataset, the framework integrates an active learning loop. As the system operates in internal dogfooding and staging cycles, emerging edge cases and novel user intents are continually appended to the repository and activated by run profile.
+The governance mechanics for this evolution are formalized in Section~\ref{sec:qbank_management}.
+
+\subsection{Methodology and Data Collection}
+The empirical data collected for this study spans an intensive four-week operational evaluation period, encompassing 38 discrete execution runs generated over approximately 20 feature releases (spanning system versions v4.1.0 through v4.3.2). In the mainline combined configuration, the active suite evolved from 59 tests to 86, 88, 106, and ultimately 133 scenarios, reflecting continuous discovery of new edge cases. Additional diagnostic runs used reduced profiles (13, 83, and 50 tests).
+
+During this longitudinal period, every code merge targeting the \textit{main} branch triggered an automated self-testing workflow within an isolated staging environment. The evaluation scripts orchestrated the question bank against the staging orchestrator and generated structured JSON traces. Traces were seamlessly collected via an integrated OpenTelemetry-based observability pipeline, which captured granular telemetry data—including prompt inputs, model outputs, tool invocations, precise execution durations, and the specific agent decisions—directly during runtime with negligible runtime overhead. Each trace recorded system KPIs (e.g., success rate, latency), the LangGraph execution path, and total token cost.
+
+\subsection{Research Questions}
+Our empirical evaluation aims to answer three primary research questions:
+\begin{itemize}
+    \item \textbf{RQ1:} How effective is an automated self-testing framework, compared to traditional tests, for simulating customer-like usage in pre-production and guiding safe release readiness?
+    \item \textbf{RQ2:} Which of the proposed quality dimensions (e.g., safety pass rate, latency, evidence coverage) are most predictive of user-facing regressions?
+    \item \textbf{RQ3:} How do quality metrics evolve across rapid LLM app releases, and what architectural patterns dictate stability versus degradation?
+\end{itemize}

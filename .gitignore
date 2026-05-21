@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.log
+.env
+bench-results-*.json
+dist/

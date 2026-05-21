@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\caption{Operational overhead by suite size. Total tests vs run duration: Pearson $r=0.92$ ($p=0.000$), slope $+5996$ ms/test.}
+\label{tab:overhead_scaling}
+\begin{tabular}{rrrrr}
+\toprule
+\textbf{Suite} & \textbf{Runs} & \textbf{Med. s} & \textbf{Med./Test ms} & \textbf{P95 ms} \\
+\midrule
+13 & 2 & 61.1 & 4702.7 & 11960 \\
+50 & 1 & 191.9 & 3837.6 & 8915 \\
+59 & 9 & 241.1 & 4086.7 & 9850 \\
+83 & 3 & 548.5 & 6608.5 & 14331 \\
+86 & 9 & 409.6 & 4763.2 & 11393 \\
+88 & 4 & 391.0 & 4443.1 & 11604 \\
+106 & 8 & 523.4 & 4937.4 & 12194 \\
+133 & 2 & 789.4 & 5935.4 & 13974 \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table}

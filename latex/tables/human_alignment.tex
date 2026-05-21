@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\caption{Evaluator alignment study: $n=60$ stratified test cases (20 system-failed, 40 system-passed), evaluated blind by two independent human evaluators and an LLM-as-judge using a judge model from a different capability tier within the same model family (partial mitigation of shared-bias risk; same-family bias cannot be fully excluded)~\cite{zheng2023judging}. Human evaluator columns completed. $\kappa$ interpretation follows Landis \& Koch~\cite{landis1977kappa}; see Section~\ref{sec:discussion} for disaggregated failure-mode analysis.}
+\label{tab:human_alignment}
+\begin{tabular}{p{3.0cm}rrr}
+\toprule
+\textbf{Comparison} & \textbf{N} & \textbf{Agree.} & \textbf{$\kappa$} \\
+\midrule
+Human Evaluator 1 vs 2 & 60 & 83.3\% & 0.359 \\
+LLM Judge vs System Gate & 60 & 63.3\% & 0.132 \\
+Human 1 vs System Gate & 60 & 66.7\% & 0.167 \\
+Human 2 vs System Gate & 60 & 63.3\% & 0.000 \\
+LLM Judge vs Human 1 & 60 & 80.0\% & 0.444 \\
+LLM Judge vs Human 2 & 60 & 73.3\% & 0.149 \\
+\bottomrule
+\end{tabular}
+\setlength{\tabcolsep}{6pt}
+\end{table}

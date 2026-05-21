@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\renewcommand{\arraystretch}{1.2}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Qualitative comparison with concurrent automated testing frameworks for LLM applications (STELLAR~\cite{sorokin2026stellar}; MA-Committees~\cite{karanam2025committees}).}
+\label{tab:concurrent_comparison}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{p{2.0cm}p{1.7cm}p{1.7cm}p{1.9cm}}
+\toprule
+\textbf{Aspect} & \textbf{Ours} & \textbf{STELLAR} & \textbf{MA-Comm.} \\
+\midrule
+Primary goal & Release gating & Failure discovery & Bug detection \\
+Quality dims. & 5D gate & Linguistic feats. & Persona diversity \\
+Release decision & P/H/R & Failure set & Consensus vote \\
+Evidence cov. & Formal dim. & Not addressed & Not addressed \\
+Safety as dim. & \checkmark & Partial (SafeQA) & Adversarial persona \\
+CI/CD & Native & Offline & Offline \\
+Study scale & 38 runs & 2 use cases & 84 runs \\
+Thresholds & Empirical & Search fitness & Vote threshold \\
+\bottomrule
+\end{tabular}}
+\setlength{\tabcolsep}{6pt}
+\end{table}

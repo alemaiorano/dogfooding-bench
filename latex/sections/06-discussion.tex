@@ -1,0 +1,61 @@
+\section{Discussion}
+\label{sec:discussion}
+
+The results of this longitudinal study support the value of adopting empirical oversight mechanisms like automated self-testing in LLM application environments. Our findings show that quantitative thresholds mapped to structured conversation paths can catch behavioral regressions that traditional testing suites (e.g., unit/integration tests) often miss~\cite{dobslaw2025testing}.
+
+\subsection{Implications for Industry Practice}
+The \textit{Automated Self-Testing Quality Gates} framework represents a practical shift from ad-hoc manual testing to systematic, evidence-driven release management in Agentic AI. The PROMOTE/HOLD/ROLLBACK logic instills confidence in CI/CD pipelines previously rendered unreliable by non-deterministic LLM behavior. In this study, persona-based dogfooding was used as a pre-production proxy for customer usage, enabling faster product evolution while preserving quality before first external launch.
+
+Crucially, treating the evaluation dataset as a living, dynamic repository---constantly expanding via active learning and real-world internal testing insights---mitigates overfitting to the evaluation set. By continuously injecting emerging conversational paradigms into the question bank, organizations can ensure that their quality gates evolve proportionally to reflect the complexity of the underlying LLM models.
+
+\paragraph{Computational and operational overhead.}
+A practical concern for CI/CD adoption is whether the self-testing suite is lightweight enough to run on every merge without blocking developer velocity. The results in Section~\ref{sec:results} and Table~\ref{tab:overhead_scaling} show predictable, near-linear scaling between suite size and runtime, which supports capacity planning and tiered parallelization for larger banks. Because tests run sequentially against the live orchestrator endpoint and reuse the existing OpenTelemetry stack, this gate can be introduced without dedicated new infrastructure; the operational implication is mainly scheduling and release-window management, not architectural redesign.
+
+\subsection{Framework Transferability and Domain Generalizability}
+\label{sec:generalizability}
+
+While this study is conducted on a single marketing analytics multi-agent system, the framework's architecture is intentionally domain-agnostic: the gate skeleton (five orthogonal quality dimensions, PROMOTE/\allowbreak HOLD/\allowbreak ROLLBACK logic, CI/CD integration, and OTel-based observability) can be transferred to other LLM application domains by re-calibrating only the question-bank tiers and threshold bands.
+
+We outline anticipated adaptations for three representative domains:
+
+\paragraph{Healthcare and clinical decision support.}
+The Safety Pass Rate threshold would increase from 95\% to $\ge$99\%, reflecting near-zero tolerance for harmful outputs in clinical contexts. Evidence Coverage would remain critical---potentially with a stricter threshold---given the legal and clinical requirements for traceable references to peer-reviewed literature. Task Success would need domain-expert raters to validate clinical appropriateness beyond automated scoring. Test scenarios would require IRB-aligned adversarial prompts targeting diagnostic overconfidence and PII leakage.
+
+\paragraph{Legal and regulatory compliance.}
+Evidence Coverage would become the primary dimension, with citations linked to specific statutory provisions or case law. Latency thresholds could be relaxed (practitioners tolerate longer wait times for high-stakes research queries). A new dimension for citation fidelity---verifying that cited sources actually support the claim---would complement the existing evidence coverage signal.
+
+\paragraph{Autonomous coding agents.}
+Task Success would require functional evaluation (tests pass, code compiles) rather than LLM-judge content scoring. Latency thresholds would be substantially higher, as compilation and execution pipelines add irreducible overhead. Research Context Preservation would shift from multi-turn conversational context to cross-file code context and dependency tracking.
+
+In all cases, the \textit{structural} elements of the framework transfer without modification: the feedback loop between HOLD/ROLLBACK decisions and question bank expansion, the OpenTelemetry trace instrumentation, and the PROMOTE/\allowbreak HOLD/\allowbreak ROLLBACK state machine. Moreover, the number of gate dimensions is itself configurable: teams may add domain-specific dimensions (e.g., citation fidelity for legal applications) or consolidate dimensions that show empirical redundancy, as demonstrated by our merging of Success Rate and Helpfulness after observing perfect correlation. This modular separation between the gate skeleton and the domain-specific question bank, dimensions, and thresholds is by design, and represents a practical transfer strategy for teams adopting the framework in new application domains.
+
+\subsection{Evaluator Alignment and Automation-Bias Controls}
+Because our gate relies on automated scoring signals, evaluator misalignment is a real risk \cite{shankar2024who}. We address this risk through structural controls and a formal calibration study.
+
+\paragraph{Structural controls.}
+Three mechanisms limit automation bias in the pipeline: (i) deterministic checks over routes, schemas, and evidence signals; (ii) auditable issue labels attached to every failed test for post-hoc inspection; and (iii) periodic human-in-the-loop operational review of adversarial and low-confidence outputs. Automated scoring is treated as a first-line filter, not a replacement for human judgment on ambiguous failures.
+
+\paragraph{Formal evaluator alignment study.}
+To quantify the alignment between automated gate judgments and human perception of response quality, we conducted a stratified human calibration study. We sampled 60 individual test cases---20 from failed runs (system\_success = 0) and 40 from passed runs, stratified by question category---and presented them blind (no automated verdict visible) to two independent human evaluators and an LLM-as-judge (Gemini 2.5 Pro, prompted with a structured 3-criterion rubric: Task Completion, Factual Appropriateness, and Behavioral Safety \cite{zheng2023judging}; see Appendix Section~\ref{sec:judge_rubric}). Using a judge model from a different capability tier within the same family (Gemini 2.5 Pro vs.\ the evaluated Gemini 2.5 Flash orchestrator) provides partial mitigation of shared-bias risk inherent in same-model LLM evaluation \cite{zheng2023judging}, though same-family bias cannot be fully excluded. Human evaluators are acknowledged in the Acknowledgments section; neither is a co-author.
+
+Cohen's $\kappa$ \cite{landis1977kappa} was computed pairwise across all evaluator combinations. Results are reported in Table~\ref{tab:human_alignment}.
+
+\input{tables/human_alignment}
+
+\paragraph{LLM judge findings.}
+The LLM-as-judge study reveals \textit{complementary coverage} between automated structural evaluation and content-focused assessment rather than a simple agreement test. Overall Cohen's $\kappa$ between the LLM judge and the system gate was $\kappa = 0.13$; however, disaggregating by failure type shows this low coefficient is expected and informative. The 20 system-rejected cases split into 16 latency-threshold violations and 4 routing/metric-extraction failures. The LLM judge accepted 13 of the 20 system rejections (9 of the 16 latency-only rejects, plus all 4 routing failures), indicating that for these cases the response content was substantively acceptable but the build failed on structural dimensions (P95 latency above the 15{,}000\,ms threshold or an incorrect agent path) that are invisible in the response text alone. Conversely, of the 40 system-accepted cases, 9 were rejected by the LLM judge for content issues: truncated responses, factual fabrication (hallucinated feature names), generic FAQ deflection on specific analytical queries, and language-locale mismatches. This complementary disagreement profile is consistent with a multi-dimensional gate design: structural dimensions (latency, routing, evidence coverage) capture failure classes that content-only evaluation may miss, while content assessment exposes false negatives in automated structural evaluation.
+
+\paragraph{Human evaluator results.}
+Table~\ref{tab:human_alignment} reports the full pairwise alignment matrix across all 60 calibration cases. Inter-rater agreement between Human 1 and Human 2 was 83.3\% ($\kappa = 0.359$, fair). Alignment between each human evaluator and the system gate was slight (Human 1: 66.7\%, $\kappa = 0.167$; Human 2: 63.3\%, $\kappa = 0.000$), while LLM-judge alignment was moderate with Human 1 (80.0\%, $\kappa = 0.444$) and slight with Human 2 (73.3\%, $\kappa = 0.149$). These results reinforce the complementary-coverage interpretation: structural gate signals and content-focused judgment capture overlapping but non-identical failure classes.
+
+\subsection{Limitations and Threats to Validity}
+While the framework was successful within the parameters of this study, several limitations must be acknowledged:
+
+\begin{itemize}
+    \item \textbf{Internal Validity:} The question bank grew from 59 to 133 tests, improving coverage but reducing strict run-to-run comparability. The observed success-rate decline likely reflects harder tests rather than system degradation, but fixed-set controlled experiments are needed to isolate this effect. Team-authored questions may also introduce evaluation bias \cite{ribeiro2020beyond}, and the four-week window is limited.
+    \item \textbf{Comparative Validity:} We include internal gate ablations, but we do not provide a head-to-head execution of external protocols (e.g., committee-based regression testing or metamorphic pipelines) on the same benchmark, models, and release budget. Therefore, we claim effectiveness for the implemented gate design, not superiority over alternatives; the closest concurrent approaches are summarized in Section~\ref{sec:concurrent}.
+    \item \textbf{External Validity:} Findings come from one multi-agent marketing analytics system (Gemini 2.5 Flash) and may not transfer directly to domains with different latency, safety, or hallucination profiles. A practical transfer strategy is to keep the gate skeleton and recalibrate question-bank tiers and threshold bands for the target domain.
+    \item \textbf{Construct Validity:} Binary thresholding of abstract quality dimensions can oversimplify behavior. We reduced one redundancy by merging Success Rate and Helpfulness into \textit{Task Success Rate} after perfect overlap across 38 runs (Spearman $\rho = 1.00$). Research Context Preservation remained saturated at 100\% under deterministic context enrichment, adversarial coverage is template-bounded, and evaluator alignment is treated via the calibration study in this section.
+\end{itemize}
+
+Despite these threats, the triangulation of quantitative evaluation traces with verifiable internal release metrics demonstrates that systematic, automated self-testing successfully serves as a stringent pre-deployment quality gate, offering a robust empirical baseline for future automated QA research in Agentic AI.

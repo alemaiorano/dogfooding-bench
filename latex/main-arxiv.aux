@@ -1,0 +1,193 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{dobslaw2025testing}
+\citation{harrison2006dogfooding}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{1}{Introduction}{section.1}{}}
+\citation{wohlin2012experimentation}
+\citation{dobslaw2025testing}
+\citation{ribeiro2020beyond}
+\citation{wu2024autogen,hong2024metagpt}
+\citation{liang2023helm}
+\citation{hendrycks2021mmlu}
+\citation{srivastava2023bigbench}
+\citation{zheng2023judging}
+\citation{nushi2017human}
+\citation{zheng2023judging}
+\citation{shankar2024who}
+\citation{breck2017mltest}
+\citation{sculley2015debt}
+\citation{amershi2019se4ml}
+\citation{maiorano2026readiness}
+\@writefile{toc}{\contentsline {paragraph}{Paper Structure.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related-work}{{2}{2}{Background and Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Testing Traditional vs. LLM Applications}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Automated Evaluation of LLMs}{2}{subsection.2.2}\protected@file@percent }
+\citation{schermann2016qualitygates,shahin2017cicd}
+\citation{shahin2017cicd}
+\citation{segura2016metamorphic}
+\citation{ganguli2022redteaming,perez2022redteaming}
+\citation{bai2022constitutional}
+\citation{ouyang2022instructgpt}
+\citation{greshake2023injection}
+\citation{harrison2006dogfooding}
+\citation{feitelson2013facebook}
+\citation{rossi2016facebook}
+\citation{runeson2009guidelines,basili1994gqm}
+\citation{sorokin2026stellar}
+\citation{karanam2025committees}
+\citation{sorokin2026stellar}
+\citation{karanam2025committees}
+\citation{sorokin2026stellar}
+\citation{karanam2025committees}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Continuous Delivery and Quality Gates}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Safety and Alignment of LLM Systems}{3}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Dogfooding in Software Engineering}{3}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Concurrent Automated Testing Frameworks}{3}{subsection.2.6}\protected@file@percent }
+\newlabel{sec:concurrent}{{2.6}{3}{Concurrent Automated Testing Frameworks}{subsection.2.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Qualitative comparison with concurrent automated testing frameworks for LLM applications (STELLAR~\cite  {sorokin2026stellar}; MA-Committees~\cite  {karanam2025committees}).}}{4}{table.1}\protected@file@percent }
+\newlabel{tab:concurrent_comparison}{{1}{4}{Qualitative comparison with concurrent automated testing frameworks for LLM applications (STELLAR~\cite {sorokin2026stellar}; MA-Committees~\cite {karanam2025committees})}{table.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}The Automated Self-Testing Quality Gate Framework}{4}{section.3}\protected@file@percent }
+\newlabel{sec:framework}{{3}{4}{The Automated Self-Testing Quality Gate Framework}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Framework Architecture}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces High-level interaction between the static/dynamic Question Bank and the multi-agent LLM orchestrator during evaluation.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{4}{High-level interaction between the static/dynamic Question Bank and the multi-agent LLM orchestrator during evaluation}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Quality Dimensions and Thresholds}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Threshold rationale.}{4}{section*.3}\protected@file@percent }
+\citation{bai2022constitutional}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces CI/CD integration pipeline. A merge to the main branch triggers automated build checkout, question bank loading, full test suite execution with OpenTelemetry trace collection, five-dimensional metric computation, and deterministic gate decision. HOLD and ROLLBACK events feed back into the question bank expansion loop, preventing test suite drift.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:cicd_integration}{{2}{5}{CI/CD integration pipeline. A merge to the main branch triggers automated build checkout, question bank loading, full test suite execution with OpenTelemetry trace collection, five-dimensional metric computation, and deterministic gate decision. HOLD and ROLLBACK events feed back into the question bank expansion loop, preventing test suite drift}{figure.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{ROLLBACK threshold.}{5}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Operationalization and Automation Protocol}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Quality gate dimensions and acceptance thresholds.}}{6}{table.2}\protected@file@percent }
+\newlabel{tab:quality_thresholds}{{2}{6}{Quality gate dimensions and acceptance thresholds}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Decision Engine}{6}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Decision flowchart: PROMOTE, HOLD, or ROLLBACK based on five quality dimensions.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:decision_flowchart}{{3}{6}{Decision flowchart: PROMOTE, HOLD, or ROLLBACK based on five quality dimensions}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Question Bank Management and Test Suite Evolution}{6}{subsection.3.5}\protected@file@percent }
+\newlabel{sec:qbank_management}{{3.5}{6}{Question Bank Management and Test Suite Evolution}{subsection.3.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Expansion triggers.}{6}{section*.5}\protected@file@percent }
+\citation{runeson2009guidelines,basili1994gqm}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Operationalization of the five quality dimensions used by the release gate. Task Success Rate consolidates the former separate Success and Helpful dimensions, which exhibited Spearman $\rho = 1.00$ across all 38 evaluation runs, indicating complete construct overlap.}}{7}{table.3}\protected@file@percent }
+\newlabel{tab:metric_operationalization}{{3}{7}{Operationalization of the five quality dimensions used by the release gate. Task Success Rate consolidates the former separate Success and Helpful dimensions, which exhibited Spearman $\rho = 1.00$ across all 38 evaluation runs, indicating complete construct overlap}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Complementary coverage: traditional testing vs.\ automated self-testing.}}{7}{table.4}\protected@file@percent }
+\newlabel{tab:comparison}{{4}{7}{Complementary coverage: traditional testing vs.\ automated self-testing}{table.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Stratification as anti-overfitting mechanism.}{7}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Empirical evidence against test suite overfitting.}{7}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Setup and Case Study}{7}{section.4}\protected@file@percent }
+\newlabel{sec:case-study}{{4}{7}{Experimental Setup and Case Study}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}System Under Test: Multi-Agent Conversational AI}{7}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Evaluation Dataset (Question Bank)}{8}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Methodology and Data Collection}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Research Questions}{8}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{8}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{5}{8}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}RQ1: Effectiveness of the Quality Gate}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}RQ1.1: Ablation Against Simplified Gates}{9}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}RQ2: Predictive Dimensions of Quality}{9}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}RQ3: Evolution of Metrics Across Releases}{9}{subsection.5.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Complete evaluation trace results across 38 runs with 5 quality dimensions (Task Success Rate consolidates the legacy Success/Helpful overlap).}}{10}{table.5}\protected@file@percent }
+\newlabel{tab:decision_log}{{5}{10}{Complete evaluation trace results across 38 runs with 5 quality dimensions (Task Success Rate consolidates the legacy Success/Helpful overlap)}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Gate ablation analysis across 38 runs with the consolidated 5D gate. Severe-promoted counts indicate missed critical failures (lower is better).}}{11}{table.6}\protected@file@percent }
+\newlabel{tab:gate_ablation}{{6}{11}{Gate ablation analysis across 38 runs with the consolidated 5D gate. Severe-promoted counts indicate missed critical failures (lower is better)}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Spearman rank correlation matrix between variable quality dimensions (RC excluded as constant). $^{*}$\,$p<0.05$ (two-sided, $n=38$); coefficients without a marker are not statistically significant.}}{11}{table.7}\protected@file@percent }
+\newlabel{tab:correlations}{{7}{11}{Spearman rank correlation matrix between variable quality dimensions (RC excluded as constant). $^{*}$\,$p<0.05$ (two-sided, $n=38$); coefficients without a marker are not statistically significant}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Bootstrap 95\% confidence intervals for metric means (B=10{,}000).}}{11}{table.8}\protected@file@percent }
+\newlabel{tab:confidence_intervals}{{8}{11}{Bootstrap 95\% confidence intervals for metric means (B=10{,}000)}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Mann-Kendall trend test for monotonic trends ($\alpha =0.05$).}}{11}{table.9}\protected@file@percent }
+\newlabel{tab:mann_kendall}{{9}{11}{Mann-Kendall trend test for monotonic trends ($\alpha =0.05$)}{table.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Success rate across 38 evaluation runs. Green markers indicate PROMOTE decisions; red markers indicate ROLLBACK. The dashed line marks the 80\% acceptance threshold.}}{11}{figure.4}\protected@file@percent }
+\newlabel{fig:success_rate}{{4}{11}{Success rate across 38 evaluation runs. Green markers indicate PROMOTE decisions; red markers indicate ROLLBACK. The dashed line marks the 80\% acceptance threshold}{figure.4}{}}
+\citation{dobslaw2025testing}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Distribution of P95 latency by suite phase labels (D13, C59, C86-88, C106, C133). The increasing trend ($\tau = 0.374$) correlates with growing test-suite complexity.}}{12}{figure.5}\protected@file@percent }
+\newlabel{fig:latency_distribution}{{5}{12}{Distribution of P95 latency by suite phase labels (D13, C59, C86-88, C106, C133). The increasing trend ($\tau = 0.374$) correlates with growing test-suite complexity}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Descriptive statistics across evaluation runs.}}{12}{table.10}\protected@file@percent }
+\newlabel{tab:descriptive}{{10}{12}{Descriptive statistics across evaluation runs}{table.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Operational Overhead and Scalability}{12}{subsection.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Operational overhead by suite size. Total tests vs run duration: Pearson $r=0.92$ ($p=0.000$), slope $+5996$ ms/test.}}{12}{table.11}\protected@file@percent }
+\newlabel{tab:overhead_scaling}{{11}{12}{Operational overhead by suite size. Total tests vs run duration: Pearson $r=0.92$ ($p=0.000$), slope $+5996$ ms/test}{table.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{12}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{12}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Implications for Industry Practice}{12}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Computational and operational overhead.}{12}{section*.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Joint evolution of the five gate dimensions across 38 evaluation runs. Task success trend reflects increasing test-suite difficulty; evidence coverage isolates severe regressions; latency growth tracks suite expansion while remaining under threshold.}}{13}{figure.6}\protected@file@percent }
+\newlabel{fig:quality_evolution}{{6}{13}{Joint evolution of the five gate dimensions across 38 evaluation runs. Task success trend reflects increasing test-suite difficulty; evidence coverage isolates severe regressions; latency growth tracks suite expansion while remaining under threshold}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Framework Transferability and Domain Generalizability}{13}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:generalizability}{{6.2}{13}{Framework Transferability and Domain Generalizability}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Healthcare and clinical decision support.}{13}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Legal and regulatory compliance.}{13}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Autonomous coding agents.}{13}{section*.11}\protected@file@percent }
+\citation{shankar2024who}
+\citation{zheng2023judging}
+\citation{zheng2023judging}
+\citation{landis1977kappa}
+\citation{zheng2023judging}
+\citation{landis1977kappa}
+\citation{zheng2023judging}
+\citation{landis1977kappa}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Evaluator Alignment and Automation-Bias Controls}{14}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Structural controls.}{14}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Formal evaluator alignment study.}{14}{section*.13}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Evaluator alignment study: $n=60$ stratified test cases (20 system-failed, 40 system-passed), evaluated blind by two independent human evaluators and an LLM-as-judge using a judge model from a different capability tier within the same model family (partial mitigation of shared-bias risk; same-family bias cannot be fully excluded)~\cite  {zheng2023judging}. Human evaluator columns completed. $\kappa $ interpretation follows Landis \& Koch~\cite  {landis1977kappa}; see Section~\ref {sec:discussion} for disaggregated failure-mode analysis.}}{14}{table.12}\protected@file@percent }
+\newlabel{tab:human_alignment}{{12}{14}{Evaluator alignment study: $n=60$ stratified test cases (20 system-failed, 40 system-passed), evaluated blind by two independent human evaluators and an LLM-as-judge using a judge model from a different capability tier within the same model family (partial mitigation of shared-bias risk; same-family bias cannot be fully excluded)~\cite {zheng2023judging}. Human evaluator columns completed. $\kappa $ interpretation follows Landis \& Koch~\cite {landis1977kappa}; see Section~\ref {sec:discussion} for disaggregated failure-mode analysis}{table.12}{}}
+\@writefile{toc}{\contentsline {paragraph}{LLM judge findings.}{14}{section*.14}\protected@file@percent }
+\citation{ribeiro2020beyond}
+\citation{maiorano2026readiness}
+\@writefile{toc}{\contentsline {paragraph}{Human evaluator results.}{15}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Limitations and Threats to Validity}{15}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{15}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{7}{15}{Conclusion}{section.7}{}}
+\bibstyle{plainnat}
+\bibdata{references}
+\bibcite{amershi2019se4ml}{{1}{2019}{{Amershi et~al.}}{{Amershi, Begel, Bird, DeLine, Gall, Kamar, Nagappan, Nushi, and Zimmermann}}}
+\bibcite{bai2022constitutional}{{2}{2022}{{Bai et~al.}}{{Bai, Kadavath, Kundu, Askell, Kernion, Jones, Chen, Goldie, Mirhoseini, McKinnon, et~al.}}}
+\bibcite{basili1994gqm}{{3}{1994}{{Basili et~al.}}{{Basili, Caldiera, and Rombach}}}
+\bibcite{breck2017mltest}{{4}{2017}{{Breck et~al.}}{{Breck, Cai, Nielsen, Salib, and Sculley}}}
+\@writefile{toc}{\contentsline {paragraph}{Funding}{16}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Competing Interests}{16}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Author Contributions}{16}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Data Availability}{16}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Code Availability}{16}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ethics Approval and Consent to Participate}{16}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Consent for Publication}{16}{section*.25}\protected@file@percent }
+\bibcite{dobslaw2025testing}{{5}{2025}{{Dobslaw et~al.}}{{Dobslaw, Feldt, Yoon, and Yoo}}}
+\bibcite{feitelson2013facebook}{{6}{2013}{{Feitelson et~al.}}{{Feitelson, Frachtenberg, and Beck}}}
+\bibcite{ganguli2022redteaming}{{7}{2022}{{Ganguli et~al.}}{{Ganguli, Lovitt, Kernion, Askell, Bai, Kadavath, Mann, Perez, Schiefer, Ndousse, et~al.}}}
+\bibcite{greshake2023injection}{{8}{2023}{{Greshake et~al.}}{{Greshake, Abdelnabi, Mishra, Endres, Holz, and Fritz}}}
+\bibcite{harrison2006dogfooding}{{9}{2006}{{Harrison}}{{}}}
+\bibcite{hendrycks2021mmlu}{{10}{2021}{{Hendrycks et~al.}}{{Hendrycks, Burns, Basart, Zou, Mazeika, Song, and Steinhardt}}}
+\bibcite{hong2024metagpt}{{11}{2024}{{Hong et~al.}}{{Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang, Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber}}}
+\bibcite{karanam2025committees}{{12}{2025}{{Karanam et~al.}}{{}}}
+\bibcite{landis1977kappa}{{13}{1977}{{Landis and Koch}}{{}}}
+\bibcite{liang2023helm}{{14}{2023}{{Liang et~al.}}{{Liang, Bommasani, Lee, Tsipras, Soylu, Yasunaga, Zhang, Narayanan, Wu, Kumar, et~al.}}}
+\bibcite{maiorano2026readiness}{{15}{2026}{{Maiorano}}{{}}}
+\bibcite{nushi2017human}{{16}{2017}{{Nushi et~al.}}{{Nushi, Kamar, Horvitz, and Kossmann}}}
+\bibcite{ouyang2022instructgpt}{{17}{2022}{{Ouyang et~al.}}{{Ouyang, Wu, Jiang, Almeida, Wainwright, Mishkin, Zhang, Agarwal, Slama, Ray, et~al.}}}
+\bibcite{perez2022redteaming}{{18}{2022}{{Perez et~al.}}{{Perez, Huang, Song, Cai, Ring, Aslanides, Glaese, McAleese, and Irving}}}
+\bibcite{ribeiro2020beyond}{{19}{2020}{{Ribeiro et~al.}}{{Ribeiro, Wu, Guestrin, and Singh}}}
+\bibcite{rossi2016facebook}{{20}{2016}{{Rossi et~al.}}{{Rossi, Shibley, Su, Beck, Savor, and Stumm}}}
+\bibcite{runeson2009guidelines}{{21}{2009}{{Runeson and H{\"o}st}}{{}}}
+\bibcite{schermann2016qualitygates}{{22}{2016}{{Schermann et~al.}}{{Schermann, Cito, Leitner, and Gall}}}
+\bibcite{sculley2015debt}{{23}{2015}{{Sculley et~al.}}{{Sculley, Holt, Golovin, Davydov, Phillips, Ebner, Chaudhary, Young, Crespo, and Dennison}}}
+\bibcite{segura2016metamorphic}{{24}{2016}{{Segura et~al.}}{{Segura, Fraser, Sanchez, and Ruiz-Cort\'{e}s}}}
+\bibcite{shahin2017cicd}{{25}{2017}{{Shahin et~al.}}{{Shahin, Babar, and Zhu}}}
+\bibcite{shankar2024who}{{26}{2024}{{Shankar et~al.}}{{Shankar, Zamfirescu-Pereira, Hartmann, Parameswaran, and Arawjo}}}
+\bibcite{sorokin2026stellar}{{27}{2026}{{Sorokin et~al.}}{{Sorokin, Vasilev, Friedl, and Stocco}}}
+\bibcite{srivastava2023bigbench}{{28}{2023}{{Srivastava et~al.}}{{Srivastava, Rastogi, Rao, Shoeb, Abid, Fisch, Brown, Santoro, Gupta, et~al.}}}
+\bibcite{wohlin2012experimentation}{{29}{2012}{{Wohlin et~al.}}{{Wohlin, Runeson, H{\"o}st, Ohlsson, Regnell, and Wessl\'{e}n}}}
+\bibcite{wu2024autogen}{{30}{2024}{{Wu et~al.}}{{Wu, Bansal, Zhang, Wu, Li, Zhu, Jiang, Zhang, Zhang, Liu, Awadallah, White, Burger, and Wang}}}
+\bibcite{zheng2023judging}{{31}{2023}{{Zheng et~al.}}{{Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li, Li, Xing, Zhang, Gonzalez, and Stoica}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Supplementary Material}{18}{appendix.A}\protected@file@percent }
+\newlabel{sec:appendix}{{A}{18}{Supplementary Material}{appendix.A}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Evaluation Gate Pipeline (Pseudocode)}{18}{subsection.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}LLM-as-Judge Evaluation Rubric}{18}{subsection.A.2}\protected@file@percent }
+\newlabel{sec:judge_rubric}{{A.2}{18}{LLM-as-Judge Evaluation Rubric}{subsection.A.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Evaluation Gate Pipeline Decision Logic}}{19}{algorithm.1}\protected@file@percent }
+\newlabel{alg:gate_pipeline}{{1}{19}{Evaluation Gate Pipeline (Pseudocode)}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Example Scenario: Adversarial Persona Test}{19}{subsection.A.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Dimensional Metric Extraction Logic}}{20}{algorithm.2}\protected@file@percent }
+\newlabel{alg:metric_extraction}{{2}{20}{Evaluation Gate Pipeline (Pseudocode)}{algorithm.2}{}}
+\gdef \@abspage@last{20}

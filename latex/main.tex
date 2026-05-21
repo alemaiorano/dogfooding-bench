@@ -1,0 +1,110 @@
+\documentclass[twocolumn]{svjour3}          % twocolumn
+
+\smartqed  % flush right qed marks, e.g. at end of proof
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes.geometric, positioning, shadows}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{microtype}
+% \journalname{Empirical Software Engineering}  % Commented for arXiv preprint; uncomment for EMSE submission
+
+% Hyperref bookmark level for algorithm float
+\makeatletter
+\providecommand*{\toclevel@algorithm}{0}
+\makeatother
+
+\begin{document}
+
+\title{Automated Self-Testing as a Quality Gate: Evidence-Driven Release Management for LLM Applications}
+
+\author{Alexandre Cristov\~ao Maiorano}
+
+\institute{Alexandre Cristov\~ao Maiorano \at
+              Independent Researcher \\
+              \email{alexandre@lumytics.com}
+}
+
+% \date{Received: date / Accepted: date}  % For EMSE submission: uncomment and let editor fill dates
+% For arXiv preprint: date is automatically handled by \maketitle
+
+\maketitle
+
+\begin{abstract}
+Traditional testing is insufficient for catching behavioral regressions in LLM applications, where non-deterministic outputs and evolving model behavior complicate quality assurance. We present an automated self-testing framework that introduces quality gates with evidence-based release decisions (PROMOTE/HOLD/ROLLBACK) across five empirically grounded dimensions: task success rate, research context preservation, P95 latency, safety pass rate, and evidence coverage. We evaluate the framework through a longitudinal case study of an internally deployed multi-agent conversational AI system with specific marketing capabilities in active development, covering 38 evaluation runs across 20+ internal releases. The gate identified two ROLLBACK-grade builds in early runs and supported stable quality evolution over a four-week staging lifecycle while exercising persona-grounded, multi-turn, adversarial, and evidence-required scenarios. Statistical analysis (Mann-Kendall trends, Spearman correlations, bootstrap confidence intervals), gate ablation, and overhead scaling indicate that evidence coverage is the primary severe-regression discriminator and that runtime scales predictably with suite size. A human calibration study ($n=60$ stratified cases, two independent evaluators, LLM-as-judge cross-validation) reveals complementary multi-modal coverage: LLM-judge disagreements with the system gate ($\kappa=0.13$) are attributable to structural failure modes---latency violations and routing errors---invisible in response text alone, while the judge independently surfaces content quality failures missed by structural checks, consistent with a multi-dimensional gate design. The framework, supplementary pseudocode, and calibration artifacts are provided to support adoption and independent replication.
+\keywords{LLM applications \and Quality assurance \and Automated self-testing \and Release management \and Empirical software engineering}
+\end{abstract}
+
+\input{sections/01-introduction}
+\input{sections/02-related-work}
+\input{sections/03-framework}
+\input{sections/04-case-study}
+\input{sections/05-results}
+\input{sections/06-discussion}
+\input{sections/07-conclusion}
+
+\section*{Acknowledgments}
+The author thanks two independent evaluators for their participation in the human calibration study. Neither evaluator is a co-author; their role was limited to blind response annotation according to the protocol described in Section~\ref{sec:discussion}.
+
+\section*{AI Tools Disclosure}
+
+This research leveraged AI-assisted development tools to support manuscript preparation and code development, while maintaining full human oversight and accountability. The following tools were used:
+\begin{itemize}
+    \item \textbf{Language models:} GPT-5 family (OpenAI via Codex),
+    Claude Opus 4.6 and Sonnet 4.5 (Anthropic Claude Code), and
+    Gemini CLI models (including Gemini 3 variants for authoring support,
+    Gemini 2.5 Flash for system evaluation workloads, and
+    Gemini 2.5 Pro as the independent LLM-as-judge in the human calibration study)
+    were used to generate and review code implementations, and to refine manuscript text.
+
+    \item \textbf{Web search:} MCP Tavily integration was used to support literature review and fact-checking during manuscript preparation.
+\end{itemize}
+
+All scientific arguments, empirical methodology, statistical analysis, research questions, and conclusions were independently conceived, developed, and validated by the author. Supplementary materials (examples, pseudocode, and documentation) are provided to illustrate the core concepts, ensuring transparency of our empirical approach without requiring a complete replication package.
+
+\section*{Statements and Declarations}
+\paragraph{Funding}
+This study did not receive a direct research grant. Experimental operation used Google Cloud credits, Gemini 2.5 Flash free-tier usage for system evaluation workloads, and Gemini 2.5 Pro free-tier usage for the LLM-as-judge calibration study.
+
+\paragraph{Competing Interests}
+The author declares no competing interests.
+
+\paragraph{Author Contributions}
+Alexandre Cristov\~ao Maiorano conceived the study, designed the methodology, implemented the analysis pipeline, conducted statistical analyses, interpreted results, and wrote and revised the manuscript (sole author).
+
+\paragraph{Data Availability}
+Aggregate results, all statistical tables, selected analysis scripts, 38
+anonymised evaluation traces, and the 83-question public replication subset are
+available in the public replication repository:
+\url{https://github.com/alemaiorano/dogfooding-bench}. The full internal
+question bank used during the private development cycle evolved beyond the
+public subset and is not fully released. Additional methodological details may
+be provided by the author upon reasonable request.
+
+\paragraph{Code Availability}
+\begin{sloppypar}
+The public replication repository provides the statistical analysis pipeline
+(\path{statistical_analysis.py}, \path{generate_figures.py}), human calibration
+scripts (\path{human_eval_sampler.py}, \path{llm_judge_eval.py},
+\path{human_eval_analysis.py}), benchmark runner code, and replication
+instructions. Production orchestration code for the internal system under test
+is not publicly released; the appendix provides implementation-oriented
+pseudocode sufficient for independent adaptation.
+\end{sloppypar}
+
+\paragraph{Ethics Approval and Consent to Participate}
+Not applicable.
+
+\paragraph{Consent for Publication}
+Not applicable.
+
+\bibliographystyle{spmpsci}      % mathematics and physical sciences
+\bibliography{references}   % name your BibTeX data base
+
+\input{sections/08-appendix}
+
+\end{document}
