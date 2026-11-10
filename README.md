@@ -1,7 +1,7 @@
 # dogfooding-bench 🚀
 
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-[![Paper: EMSE](https://img.shields.io/badge/Paper-Submission--Ready-blue)](https://github.com/alemaiorano/dogfooding-bench)
+[![arXiv preprint](https://img.shields.io/badge/arXiv-Preprint-b31b1b)](https://arxiv.org/abs/2603.15676)
 
 > **The B2B AI Agent Benchmark for Marketing and Analytics.**
 
@@ -89,7 +89,7 @@ If you use this benchmark or the Dogfooding Quality Gates framework, please cite
 
 ```text
 Maiorano, A. (2026). Automated Self-Testing as a Quality Gate: Evidence-Driven Release Management for LLM Applications.
-Preprint / submission-ready manuscript.
+arXiv preprint arXiv:2603.15676. https://doi.org/10.48550/arXiv.2603.15676
 ```
 
 ## 📄 License
