@@ -242,10 +242,11 @@ INSTRUCTIONS:
         const passed = this.results.filter(r => r.success).length;
         return {
             totalTests: this.results.length,
+            successRate: this.calcRate(this.results, r => r.success),
             passedTests: passed,
             failedTests: this.results.length - passed,
-            avgLatencyMs: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) || 0,
-            p95LatencyMs: p95,
+            avgLatencyMs: latencies.length ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : null,
+            p95LatencyMs: latencies.length ? p95 : null,
             researchContextPreservation: this.calcRate(this.results.filter(r => r.category === 'research'), r => !!r.researchContextPreserved),
             faqAccuracy: this.calcRate(this.results.filter(r => r.category === 'faq'), r => r.success),
             dataQueryAccuracy: this.calcRate(this.results.filter(r => r.category === 'data_query'), r => r.success),
@@ -319,7 +320,7 @@ INSTRUCTIONS:
                 }))
             },
             results: this.results,
-            recommendation: kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
+            recommendation: kpis.totalTests > 0 && kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
             topIssues: failedTests.slice(0, 3).map(t => `${t.testId}: ${t.issues[0]}`),
             insights: []
         };

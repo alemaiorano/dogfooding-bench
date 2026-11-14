@@ -66,6 +66,9 @@ identified baseline artifact and has been removed pending provenance.
 
 ### Current runner metric contract
 
+- An empty dataset returns `successRate: null` and null latency summaries; the CLI
+  displays N/A and both runner and extractor HOLD. A measured 0% remains 0%, not
+  unknown, and still triggers the extractor's task-failure ROLLBACK.
 - `requiresWeb` is preserved on successful and failed results and in stratification.
 - `evidenceCoverage` counts web-required cases with a nonempty source ID or an HTTP(S)
   citation. It measures citation presence only, not existence, relevance or correctness.

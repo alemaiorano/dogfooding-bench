@@ -50,11 +50,12 @@ export interface TestResult {
     traceSpans?: any[];
 }
 export interface KpiSummary {
+    successRate: number | null;
     totalTests: number;
     passedTests: number;
     failedTests: number;
-    avgLatencyMs: number;
-    p95LatencyMs: number;
+    avgLatencyMs: number | null;
+    p95LatencyMs: number | null;
     researchContextPreservation: number | null;
     faqAccuracy: number | null;
     dataQueryAccuracy: number | null;

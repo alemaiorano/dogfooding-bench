@@ -59,3 +59,41 @@ test('unknown safety does not override a demonstrated rollback',()=>{
    assert.match(extract(dir),/,ROLLBACK\r?\n/);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('empty CLI run remains N/A and HOLD through JSON and CSV; measured zero is distinct',async()=>{
+ const dir=scratch();let requests=0;
+ const server=http.createServer((req,res)=>{
+   requests++;res.setHeader('Content-Type','application/json');
+   res.end(JSON.stringify({data:{response:{text:''},metadata:{}}}));
+ });
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ async function execute(name,dataset){
+   const runDir=path.join(dir,name);fs.mkdirSync(runDir);
+   const file=path.join(runDir,'dataset.json');fs.writeFileSync(file,JSON.stringify(dataset));
+   const cli=process.env.BENCH_RUNNER?'src/cli.js':'dist/cli.js';
+   const child=spawn(process.execPath,[path.join(root,cli),`--dataset=${file}`,`--target=http://127.0.0.1:${server.address().port}`],{cwd:runDir});
+   let logs='';child.stdout.on('data',x=>logs+=x);child.stderr.on('data',x=>logs+=x);
+   const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});assert.equal(code,0,logs);
+   const output=fs.readdirSync(runDir).find(f=>f.startsWith('bench-results-'));
+   const result=JSON.parse(fs.readFileSync(path.join(runDir,output),'utf8'));
+   fs.mkdirSync(path.join(runDir,'evaluation-traces'));fs.copyFileSync(path.join(runDir,output),path.join(runDir,'evaluation-traces/result.json'));
+   extract(runDir);
+   const read=spawnSync('python3',['-c',"import csv,json;print(json.dumps(next(csv.DictReader(open('decision-log.csv')))))"],{cwd:runDir,encoding:'utf8'});
+   assert.equal(read.status,0,read.stderr);
+   return {result,logs,row:JSON.parse(read.stdout)};
+ }
+ try{
+   const empty=await execute('empty',{questions:[]});assert.equal(requests,0);
+   assert.equal(empty.result.kpiSummary.totalTests,0);
+   assert.equal(empty.result.kpiSummary.successRate,null);
+   assert.equal(empty.result.kpiSummary.avgLatencyMs,null);
+   assert.equal(empty.result.kpiSummary.p95LatencyMs,null);
+   assert.equal(empty.result.recommendation,'hold');
+   assert.match(empty.logs,/Success Rate: N\/A/);assert.match(empty.logs,/P95 Latency: N\/A/);assert.doesNotMatch(empty.logs,/NaN|Success Rate: 0%/);
+   for(const key of ['Success_Rate','Avg_Latency','P95_Latency','Duration_Per_Test_ms','Safety_Rate','Evidence_Coverage'])assert.equal(empty.row[key],'',key);
+   assert.equal(empty.row.Decision,'HOLD');
+   const failed=await execute('measured-zero',{questions:[{id:'measured',message:'An offline test',category:'faq'}]});
+   assert.equal(requests,1);assert.equal(failed.result.kpiSummary.successRate,0);
+   assert.match(failed.logs,/Success Rate: 0%/);assert.equal(failed.row.Success_Rate,'0.0%');assert.equal(failed.row.Decision,'ROLLBACK');
+ }finally{await new Promise(resolve=>server.close(resolve));fs.rmSync(dir,{recursive:true,force:true});}
+});

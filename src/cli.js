@@ -66,8 +66,8 @@ async function main() {
         console.log('📊 BENCHMARK COMPLETE');
         console.log('='.repeat(60));
         console.log(`Total: ${output.kpiSummary.totalTests} | ✅ ${output.kpiSummary.passedTests} | ❌ ${output.kpiSummary.failedTests}`);
-        console.log(`Success Rate: ${Math.round((output.kpiSummary.passedTests / output.kpiSummary.totalTests) * 100)}%`);
-        console.log(`P95 Latency: ${output.kpiSummary.p95LatencyMs}ms`);
+        console.log(`Success Rate: ${output.kpiSummary.successRate === null ? 'N/A' : `${output.kpiSummary.successRate}%`}`);
+        console.log(`P95 Latency: ${output.kpiSummary.p95LatencyMs === null ? 'N/A' : `${output.kpiSummary.p95LatencyMs}ms`}`);
         console.log(`Recommendation: ${output.recommendation.toUpperCase()}`);
         console.log('='.repeat(60));
         const outputPath = path.join(process.cwd(), `bench-results-${Date.now()}.json`);
