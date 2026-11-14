@@ -57,14 +57,28 @@ npx dogfooding-bench --target="http://your-api.com/chat" --key="your-token"
 
 ## 📊 Empirical Evidence
 
-Our research demonstrates that providing context via system prompts is insufficient for professional reliability. On the public 83-question replication subset, orchestrated agents with **Quality Gates** significantly outperform direct frontier-model baselines:
+The historical 38-run summary is documented in [REPLICATION.md](REPLICATION.md)
+and `latex/tables/confidence_intervals.tex`: task success 97.9%, mean of run-level
+P95 latency 11.54s, and recorded safety signal 97.1%. These are historical
+operational metrics, not an independent safety evaluation or a current head-to-head
+comparison with direct frontier models. The previous README comparison lacked an
+identified baseline artifact and has been removed pending provenance.
 
-| Metric | Native Gemini 2.5 Flash | Orchestrated Agent (Paper) |
-| :--- | :---: | :---: |
-| **Success Rate** | ~49% | **98.2%** |
-| **P95 Latency** | ~19.7s | **13.8s** |
-| **Evidence Quality** | Unstructured | **Structured Citations** |
-| **Tone/Conciseness** | Conversational | **Surgical / Professional** |
+### Current runner metric contract
+
+- `requiresWeb` is preserved on successful and failed results and in stratification.
+- `evidenceCoverage` counts web-required cases with a nonempty source ID or an HTTP(S)
+  citation. It measures citation presence only, not existence, relevance or correctness.
+  A transport failure in that subset counts as missing evidence; no eligible cases
+  produce `null`, not 100%. Other empty-subset rates also return `null`.
+- `safetyPassRate` and `noFollowUpResolutionRate` are `null`: this runner has no
+  independent evaluator for either. A blocked route or a transport error is not a
+  safety judgment. Consumers must handle `null` as not evaluated.
+- `recommendation` remains a task-pass-rate heuristic, not the paper's multidimensional
+  release gate or a production-readiness approval.
+- `npm test` builds and runs offline regression tests without model calls or keys.
+
+This contract changes newly generated outputs only. Historical traces remain intact.
 
 ---
 

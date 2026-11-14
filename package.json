@@ -4,7 +4,7 @@
   "description": "Public replication package and benchmark runner for the Dogfooding Quality Gates study.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build",
+    "test": "npm run build && node --test tests/*.test.cjs && cross-env BENCH_RUNNER=../src/runner.js node --test tests/*.test.cjs",
     "build": "tsc && chmod +x dist/cli.js",
     "start": "node dist/cli.js",
     "bench": "ts-node src/cli.ts"

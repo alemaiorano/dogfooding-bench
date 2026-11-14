@@ -1,10 +1,19 @@
 import { DogfoodingOutput } from './types';
+export interface RunnerConfig {
+    targetUrl?: string;
+    apiKey?: string;
+    provider?: 'openai' | 'gemini' | 'custom';
+    model?: string;
+    scenarioPath?: string;
+}
 export declare class BenchmarkRunner {
-    private targetUrl;
-    private apiKey;
+    private config;
     private results;
     private startTime;
-    constructor(targetUrl: string, apiKey: string);
+    private openai?;
+    private gemini?;
+    private scenarioContext;
+    constructor(config: RunnerConfig);
     run(datasetPath: string, studies?: string[], tier?: string): Promise<DogfoodingOutput>;
     private filterQuestions;
     private runTest;
