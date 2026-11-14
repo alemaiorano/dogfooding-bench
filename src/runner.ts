@@ -46,14 +46,14 @@ export class BenchmarkRunner {
     } else if (config.provider === 'gemini') {
       this.gemini = new GoogleGenerativeAI(config.apiKey || '');
     }
-    
+
     // Load scenario context if provided
     const sPath = config.scenarioPath || path.join(__dirname, 'scenario-A.json');
     if (fs.existsSync(sPath)) {
       const scenarioData = JSON.parse(fs.readFileSync(sPath, 'utf-8'));
       this.scenarioContext = `
 CONTEXT SCENARIO:
-You are an AI assistant for the 'the platform' marketing tool. 
+You are an AI assistant for the 'the platform' marketing tool.
 Current World State / Mock Data:
 ${JSON.stringify(scenarioData, null, 2)}
 
@@ -66,6 +66,7 @@ INSTRUCTIONS:
   }
 
   async run(datasetPath: string, studies: string[] = ['core', 'v2'], tier: string = 'smoke'): Promise<DogfoodingOutput> {
+    this.results = [];
     this.startTime = Date.now();
     const dataset = JSON.parse(fs.readFileSync(datasetPath, 'utf-8'));
     const questions = this.filterQuestions(dataset, studies, tier);
@@ -80,19 +81,21 @@ INSTRUCTIONS:
     const durationMs = Date.now() - this.startTime;
     const kpis = this.calculateKpis();
     const stratified = this.calculateStratifiedSummary();
-    
+
     return this.generateStructuredOutput(kpis, stratified, durationMs, studies.join(','), tier);
   }
 
   private filterQuestions(dataset: any, studies: string[], tier: string): QuestionBankTest[] {
-    let all: QuestionBankTest[] = dataset.questions || [];
+    let all: QuestionBankTest[] = Array.isArray(dataset.questions)
+      ? dataset.questions
+      : dataset.id && (dataset.message || dataset.text) ? [dataset] : [];
     return all;
   }
 
   private async runTest(test: QuestionBankTest, index: number, total: number) {
     const questionText = test.text || test.message || '';
     console.log(`[${index}/${total}] ${test.id}: ${questionText.substring(0, 60)}...`);
-    
+
     const start = Date.now();
     let success = false;
     let issues: string[] = [];
@@ -118,7 +121,7 @@ INSTRUCTIONS:
         // Updated model naming convention for Gemini
         let modelName = this.config.model || 'gemini-2.5-flash';
         if (!modelName.startsWith('models/')) modelName = `models/${modelName}`;
-        
+
         const model = this.gemini!.getGenerativeModel({ 
           model: modelName,
           systemInstruction: this.scenarioContext
@@ -159,6 +162,7 @@ INSTRUCTIONS:
         persona: test.persona,
         category: test.category || 'unknown',
         rawCategory: test.rawCategory || 'unknown',
+        requiresWeb: !!test.requiresWeb,
         success,
         latencyMs,
         agentPath,
@@ -168,6 +172,7 @@ INSTRUCTIONS:
         faqHandled,
         issues,
         researchContextPreserved: validation.researchContextPreserved,
+        evidenceCitationPresent: validation.evidenceCitationPresent,
         traceEvents
       });
 
@@ -178,13 +183,14 @@ INSTRUCTIONS:
       const latencyMs = Date.now() - start;
       const errorMsg = error.response?.data?.error?.message || error.message;
       issues.push(`Error: ${errorMsg}`);
-      
+
       this.results.push({
         testId: test.id,
         questionSet: test.questionSet || 'default',
         message: questionText,
         category: test.category || 'unknown',
         rawCategory: test.rawCategory || 'unknown',
+        requiresWeb: !!test.requiresWeb,
         success: false,
         latencyMs,
         agentPath: [],
@@ -198,7 +204,7 @@ INSTRUCTIONS:
 
   private validate(test: QuestionBankTest, responseText: string, agentPath: string[], intent: string, faqHandled: boolean, latencyMs: number, sourceIds: string[]) {
     const issues: string[] = [];
-    
+
     if (test.expectedPath && test.expectedPath.length > 0 && !agentPath.includes('openai-direct') && !agentPath.includes('gemini-direct')) {
       const expectedLast = test.expectedPath[test.expectedPath.length - 1];
       const actualLast = agentPath[agentPath.length - 1];
@@ -214,18 +220,24 @@ INSTRUCTIONS:
       issues.push('Response: Too long (verbosity)');
     }
 
+    if (responseText.includes('[object Object]')) {
+      issues.push('Response: JSON leak detected');
+    }
+
     const maxLatency = test.maxLatencyMs || CATEGORY_MAX_LATENCY_MS[test.category] || DEFAULT_MAX_LATENCY_MS;
     if (latencyMs > maxLatency) {
       issues.push(`Latency: ${latencyMs}ms exceeds ${maxLatency}ms`);
     }
 
-    if (test.requiresWeb && !/(http|doi|arxiv|source|fonte)/i.test(responseText) && (!sourceIds || sourceIds.length === 0)) {
+    const evidenceCitationPresent = sourceIds.some(id => typeof id === 'string' && id.trim().length > 0)
+      || /https?:\/\/[^\s<>]+/i.test(responseText);
+    if (test.requiresWeb && !evidenceCitationPresent) {
       issues.push('Evidence: Missing citations for web-required question');
     }
 
     const researchContextPreserved = test.category === 'research' && agentPath.includes('research') && !faqHandled;
 
-    return { issues, researchContextPreserved };
+    return { issues, researchContextPreserved, evidenceCitationPresent };
   }
 
   private calculateKpis(): KpiSummary {
@@ -235,22 +247,24 @@ INSTRUCTIONS:
 
     return {
       totalTests: this.results.length,
+      successRate: this.calcRate(this.results, r => r.success),
       passedTests: passed,
       failedTests: this.results.length - passed,
-      avgLatencyMs: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) || 0,
-      p95LatencyMs: p95,
+      avgLatencyMs: latencies.length ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : null,
+      p95LatencyMs: latencies.length ? p95 : null,
       researchContextPreservation: this.calcRate(this.results.filter(r => r.category === 'research'), r => !!r.researchContextPreserved),
       faqAccuracy: this.calcRate(this.results.filter(r => r.category === 'faq'), r => r.success),
       dataQueryAccuracy: this.calcRate(this.results.filter(r => r.category === 'data_query'), r => r.success),
       helpfulRate: this.calcRate(this.results, r => r.success && r.issues.length === 0),
-      noFollowUpResolutionRate: 100, 
-      safetyPassRate: this.calcRate(this.results, r => !r.agentPath.includes('blocked')),
-      evidenceCoverage: this.calcRate(this.results.filter(r => r.requiresWeb), r => r.success)
+      // Neither safety nor follow-up resolution is evaluated by this runner.
+      noFollowUpResolutionRate: null,
+      safetyPassRate: null,
+      evidenceCoverage: this.calcRate(this.results.filter(r => r.requiresWeb), r => r.evidenceCitationPresent === true)
     };
   }
 
-  private calcRate(subset: TestResult[], predicate: (r: TestResult) => boolean): number {
-    if (subset.length === 0) return 100;
+  private calcRate(subset: TestResult[], predicate: (r: TestResult) => boolean): number | null {
+    if (subset.length === 0) return null;
     return Math.round((subset.filter(predicate).length / subset.length) * 100);
   }
 
@@ -313,7 +327,7 @@ INSTRUCTIONS:
         }))
       },
       results: this.results,
-      recommendation: kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
+      recommendation: kpis.totalTests > 0 && kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
       topIssues: failedTests.slice(0, 3).map(t => `${t.testId}: ${t.issues[0]}`),
       insights: []
     };

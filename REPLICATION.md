@@ -77,10 +77,21 @@ The public replication subset contains 83 questions. The internal study suite ev
 | metric | Mean Value | 95% Confidence Interval |
 | :--- | :---: | :---: |
 | Task Success Rate | 97.9% | [97.2%, 98.6%] |
-| P95 Latency | 13.8s | [13.1s, 14.5s] |
-| Safety Pass Rate | 100.0% | [100.0%, 100.0%] |
+| Mean of run-level P95 latency | 11.54s | [10.97s, 12.08s] |
+| Recorded historical Safety Pass Rate | 97.1% | [96.8%, 97.4%] |
 
 --- 
+
+These figures summarize the 38 recorded runs in `data/decision-log.csv` and match
+`latex/tables/confidence_intervals.tex`. The latency is a mean of run-level P95s,
+not a pooled request-level P95. Recorded safety metrics are historical operational
+signals, not independent proof of response safety. This runner correction does not
+rewrite or establish invalidity of the historical study.
+
+New runner outputs may contain null metrics. `extract_metrics.py` retains those
+runs, writes empty cells for unknown gate dimensions, and prevents PROMOTE until
+required dimensions are measured (a demonstrated ROLLBACK still takes precedence).
+Do not mix incomplete new runs into the frozen longitudinal statistical analysis.
 
 ## Citation
 

@@ -27,6 +27,12 @@ files = glob.glob(os.path.join(traces_dir, "*.json"))
 rows = []
 
 
+def percent(value, decimals=None):
+    if value is None:
+        return ""  # Unknown, never zero or a fabricated pass.
+    return f"{value:.{decimals}f}%" if decimals is not None else f"{value}%"
+
+
 def is_safety_test(result):
     raw_intent = str(result.get('rawIntent', '')).lower()
     raw_category = str(result.get('rawCategory', '')).lower()
@@ -67,18 +73,23 @@ for file_path in files:
         passed = kpi.get('passedTests', 0)
 
         # Compute all 5 gate dimensions (Task Success consolidates Success+Helpful).
-        success_rate = (passed / total * 100) if total > 0 else 0
-        p95_latency = kpi.get('p95LatencyMs', 0)
-        research_context = kpi.get('researchContextPreservation', 0)
-        safety_rate_kpi = float(kpi.get('safetyPassRate', 0))
-        evidence_coverage = kpi.get('evidenceCoverage', 0)
-        avg_latency = kpi.get('avgLatencyMs', 0)
-        duration_per_test_ms = (duration_ms / total) if total > 0 else 0
+        success_rate = (passed / total * 100) if total > 0 else None
+        p95_latency = kpi.get('p95LatencyMs') if total > 0 else None
+        research_context = kpi.get('researchContextPreservation')
+        safety_raw = kpi.get('safetyPassRate')
+        safety_rate_kpi = float(safety_raw) if safety_raw is not None else None
+        evidence_coverage = kpi.get('evidenceCoverage')
+        avg_latency = kpi.get('avgLatencyMs') if total > 0 else None
+        duration_per_test_ms = (duration_ms / total) if total > 0 else None
+        if total <= 0:
+            research_context = safety_rate_kpi = evidence_coverage = None
 
         # Recompute safety from adversarial/safety subset for improved construct validity.
         results = data.get('results', [])
         safety_tests = [r for r in results if is_safety_test(r)]
-        if len(safety_tests) > 0:
+        if safety_rate_kpi is None:
+            safety_rate_recomputed = None
+        elif len(safety_tests) > 0:
             safety_passed = sum(1 for r in safety_tests if bool(r.get('success')))
             safety_rate_recomputed = (safety_passed / len(safety_tests)) * 100
         else:
@@ -98,6 +109,9 @@ for file_path in files:
         hold = False
 
         for key, value in metrics.items():
+            if value is None:
+                hold = True
+                continue
             threshold = THRESHOLDS[key]
             rollback_threshold = threshold * ROLLBACK_FACTOR
             if value < rollback_threshold:
@@ -107,7 +121,9 @@ for file_path in files:
                 hold = True
 
         # Latency check (inverted: lower is better)
-        if p95_latency >= THRESHOLDS['p95_latency_ms'] / ROLLBACK_FACTOR:
+        if p95_latency is None:
+            hold = True
+        elif p95_latency >= THRESHOLDS['p95_latency_ms'] / ROLLBACK_FACTOR:
             rollback = True
         elif p95_latency >= THRESHOLDS['p95_latency_ms']:
             hold = True
@@ -127,15 +143,15 @@ for file_path in files:
             'Prompt_Version': prompt_version,
             'Tier': tier,
             'Total_Tests': total,
-            'Success_Rate': f"{success_rate:.1f}%",
+            'Success_Rate': percent(success_rate, 1),
             'Avg_Latency': avg_latency,
             'P95_Latency': p95_latency,
             'Duration_ms': duration_ms,
-            'Duration_Per_Test_ms': f"{duration_per_test_ms:.1f}",
-            'Research_Context': f"{research_context}%",
-            'Safety_Rate': f"{safety_rate}%",
-            'Safety_Rate_Recomputed': f"{safety_rate_recomputed:.1f}%",
-            'Evidence_Coverage': f"{evidence_coverage}%",
+            'Duration_Per_Test_ms': f"{duration_per_test_ms:.1f}" if duration_per_test_ms is not None else "",
+            'Research_Context': percent(research_context),
+            'Safety_Rate': percent(safety_rate),
+            'Safety_Rate_Recomputed': percent(safety_rate_recomputed, 1),
+            'Evidence_Coverage': percent(evidence_coverage),
             'Decision': decision,
         })
 

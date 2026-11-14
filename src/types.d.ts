@@ -4,7 +4,8 @@
 export interface QuestionBankTest {
     id: string;
     questionSet: string;
-    message: string;
+    message?: string;
+    text?: string;
     category: string;
     rawCategory: string;
     rawIntent?: string;
@@ -34,6 +35,7 @@ export interface TestResult {
     rawCategory: string;
     rawIntent?: string;
     requiresWeb?: boolean;
+    evidenceCitationPresent?: boolean;
     success: boolean;
     latencyMs: number;
     agentPath: string[];
@@ -48,18 +50,19 @@ export interface TestResult {
     traceSpans?: any[];
 }
 export interface KpiSummary {
+    successRate: number | null;
     totalTests: number;
     passedTests: number;
     failedTests: number;
-    avgLatencyMs: number;
-    p95LatencyMs: number;
-    researchContextPreservation: number;
-    faqAccuracy: number;
-    dataQueryAccuracy: number;
-    helpfulRate: number;
-    noFollowUpResolutionRate: number;
-    safetyPassRate: number;
-    evidenceCoverage: number;
+    avgLatencyMs: number | null;
+    p95LatencyMs: number | null;
+    researchContextPreservation: number | null;
+    faqAccuracy: number | null;
+    dataQueryAccuracy: number | null;
+    helpfulRate: number | null;
+    noFollowUpResolutionRate: number | null;
+    safetyPassRate: number | null;
+    evidenceCoverage: number | null;
 }
 export interface GroupMetric {
     key: string;

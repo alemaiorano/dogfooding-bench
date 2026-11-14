@@ -40,7 +40,8 @@ exports.BenchmarkRunner = void 0;
 const axios_1 = __importDefault(require("axios"));
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
-const types_1 = require("./types");
+const openai_1 = require("openai");
+const generative_ai_1 = require("@google/generative-ai");
 const DEFAULT_MAX_LATENCY_MS = 15000;
 const CATEGORY_MAX_LATENCY_MS = {
     action: 20000,
@@ -51,19 +52,40 @@ const CATEGORY_MAX_LATENCY_MS = {
 };
 const MAX_RESPONSE_LENGTH = 3000;
 class BenchmarkRunner {
-    targetUrl;
-    apiKey;
-    results = [];
-    startTime = 0;
-    constructor(targetUrl, apiKey) {
-        this.targetUrl = targetUrl.replace(/\/$/, '');
-        this.apiKey = apiKey;
+    constructor(config) {
+        this.results = [];
+        this.startTime = 0;
+        this.scenarioContext = '';
+        this.config = config;
+        if (config.provider === 'openai') {
+            this.openai = new openai_1.OpenAI({ apiKey: config.apiKey });
+        }
+        else if (config.provider === 'gemini') {
+            this.gemini = new generative_ai_1.GoogleGenerativeAI(config.apiKey || '');
+        }
+        // Load scenario context if provided
+        const sPath = config.scenarioPath || path.join(__dirname, 'scenario-A.json');
+        if (fs.existsSync(sPath)) {
+            const scenarioData = JSON.parse(fs.readFileSync(sPath, 'utf-8'));
+            this.scenarioContext = `
+CONTEXT SCENARIO:
+You are an AI assistant for the 'the platform' marketing tool.
+Current World State / Mock Data:
+${JSON.stringify(scenarioData, null, 2)}
+
+INSTRUCTIONS:
+1. Use the data above to answer user questions.
+2. If the user asks about 'my simulations' or metrics, refer to the data in 'accountData'.
+3. Be professional and concise.
+`;
+        }
     }
     async run(datasetPath, studies = ['core', 'v2'], tier = 'smoke') {
+        this.results = [];
         this.startTime = Date.now();
         const dataset = JSON.parse(fs.readFileSync(datasetPath, 'utf-8'));
         const questions = this.filterQuestions(dataset, studies, tier);
-        console.log(`\n🚀 Starting Benchmark | Target: ${this.targetUrl} | Tests: ${questions.length}`);
+        console.log(`\n🚀 Starting Benchmark | Mode: ${this.config.provider || 'custom'} | Tests: ${questions.length}`);
         for (let i = 0; i < questions.length; i++) {
             const test = questions[i];
             await this.runTest(test, i + 1, questions.length);
@@ -74,26 +96,14 @@ class BenchmarkRunner {
         return this.generateStructuredOutput(kpis, stratified, durationMs, studies.join(','), tier);
     }
     filterQuestions(dataset, studies, tier) {
-        let all = [];
-        if (Array.isArray(dataset.questions)) {
-            all = dataset.questions;
-        }
-        else if (dataset.id && dataset.message) {
-            all = [dataset];
-        }
-        else {
-            all = dataset.questions || [];
-        }
-        return all.filter(q => {
-            if (tier === 'smoke' && q.id && !q.id.includes('001') && !q.id.includes('smoke')) {
-                // Simple heuristic for smoke test if no explicit tags
-                // return false; 
-            }
-            return true;
-        });
+        let all = Array.isArray(dataset.questions)
+            ? dataset.questions
+            : dataset.id && (dataset.message || dataset.text) ? [dataset] : [];
+        return all;
     }
     async runTest(test, index, total) {
-        console.log(`[${index}/${total}] ${test.id}: ${test.message.substring(0, 60)}...`);
+        const questionText = test.text || test.message || '';
+        console.log(`[${index}/${total}] ${test.id}: ${questionText.substring(0, 60)}...`);
         const start = Date.now();
         let success = false;
         let issues = [];
@@ -104,34 +114,62 @@ class BenchmarkRunner {
         let sourceIds = [];
         let traceEvents = [];
         try {
-            const response = await axios_1.default.post(`${this.targetUrl}/message`, {
-                message: test.message,
-                conversationId: `bench-${test.id}-${Date.now()}`,
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${this.apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                timeout: 45000
-            });
+            if (this.config.provider === 'openai') {
+                const completion = await this.openai.chat.completions.create({
+                    messages: [
+                        { role: 'system', content: this.scenarioContext },
+                        { role: 'user', content: questionText }
+                    ],
+                    model: this.config.model || 'gpt-4o',
+                });
+                responseText = completion.choices[0].message.content || '';
+                agentPath = ['openai-direct'];
+            }
+            else if (this.config.provider === 'gemini') {
+                // Updated model naming convention for Gemini
+                let modelName = this.config.model || 'gemini-2.5-flash';
+                if (!modelName.startsWith('models/'))
+                    modelName = `models/${modelName}`;
+                const model = this.gemini.getGenerativeModel({
+                    model: modelName,
+                    systemInstruction: this.scenarioContext
+                });
+                const result = await model.generateContent(questionText);
+                responseText = result.response.text();
+                agentPath = ['gemini-direct'];
+            }
+            else {
+                // Custom HTTP Endpoint (e.g. the platform API)
+                const response = await axios_1.default.post(this.config.targetUrl.replace(/\/$/, '') + '/message', {
+                    message: questionText,
+                    conversationId: `bench-${test.id}-${Date.now()}`,
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.config.apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    timeout: 45000
+                });
+                const data = response.data.data;
+                responseText = data.response?.text || '';
+                agentPath = data.metadata?.agentPath || [];
+                intent = data.metadata?.intent || '';
+                faqHandled = data.metadata?.faqHandled || false;
+                sourceIds = data.response?.sources?.map((s) => s.id) || [];
+                traceEvents = data.metadata?.trace?.events || [];
+            }
             const latencyMs = Date.now() - start;
-            const data = response.data.data;
-            responseText = data.response?.text || '';
-            agentPath = data.metadata?.agentPath || [];
-            intent = data.metadata?.intent || '';
-            faqHandled = data.metadata?.faqHandled || false;
-            sourceIds = data.response?.sources?.map((s) => s.id) || [];
-            traceEvents = data.metadata?.trace?.events || [];
             const validation = this.validate(test, responseText, agentPath, intent, faqHandled, latencyMs, sourceIds);
             issues = validation.issues;
             success = issues.length === 0;
             this.results.push({
                 testId: test.id,
                 questionSet: test.questionSet || 'default',
-                message: test.message,
+                message: questionText,
                 persona: test.persona,
-                category: test.category,
-                rawCategory: test.rawCategory,
+                category: test.category || 'unknown',
+                rawCategory: test.rawCategory || 'unknown',
+                requiresWeb: !!test.requiresWeb,
                 success,
                 latencyMs,
                 agentPath,
@@ -141,6 +179,7 @@ class BenchmarkRunner {
                 faqHandled,
                 issues,
                 researchContextPreserved: validation.researchContextPreserved,
+                evidenceCitationPresent: validation.evidenceCitationPresent,
                 traceEvents
             });
             console.log(`  ${success ? '✅' : '❌'} ${latencyMs}ms | ${agentPath.join(' -> ')}`);
@@ -154,9 +193,10 @@ class BenchmarkRunner {
             this.results.push({
                 testId: test.id,
                 questionSet: test.questionSet || 'default',
-                message: test.message,
+                message: questionText,
                 category: test.category || 'unknown',
                 rawCategory: test.rawCategory || 'unknown',
+                requiresWeb: !!test.requiresWeb,
                 success: false,
                 latencyMs,
                 agentPath: [],
@@ -168,7 +208,7 @@ class BenchmarkRunner {
     }
     validate(test, responseText, agentPath, intent, faqHandled, latencyMs, sourceIds) {
         const issues = [];
-        if (test.expectedPath && test.expectedPath.length > 0) {
+        if (test.expectedPath && test.expectedPath.length > 0 && !agentPath.includes('openai-direct') && !agentPath.includes('gemini-direct')) {
             const expectedLast = test.expectedPath[test.expectedPath.length - 1];
             const actualLast = agentPath[agentPath.length - 1];
             if (actualLast !== expectedLast) {
@@ -188,11 +228,13 @@ class BenchmarkRunner {
         if (latencyMs > maxLatency) {
             issues.push(`Latency: ${latencyMs}ms exceeds ${maxLatency}ms`);
         }
-        if (test.requiresWeb && !/(http|doi|arxiv|source|fonte)/i.test(responseText) && (!sourceIds || sourceIds.length === 0)) {
+        const evidenceCitationPresent = sourceIds.some(id => typeof id === 'string' && id.trim().length > 0)
+            || /https?:\/\/[^\s<>]+/i.test(responseText);
+        if (test.requiresWeb && !evidenceCitationPresent) {
             issues.push('Evidence: Missing citations for web-required question');
         }
         const researchContextPreserved = test.category === 'research' && agentPath.includes('research') && !faqHandled;
-        return { issues, researchContextPreserved };
+        return { issues, researchContextPreserved, evidenceCitationPresent };
     }
     calculateKpis() {
         const latencies = this.results.map(r => r.latencyMs).sort((a, b) => a - b);
@@ -200,22 +242,24 @@ class BenchmarkRunner {
         const passed = this.results.filter(r => r.success).length;
         return {
             totalTests: this.results.length,
+            successRate: this.calcRate(this.results, r => r.success),
             passedTests: passed,
             failedTests: this.results.length - passed,
-            avgLatencyMs: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) || 0,
-            p95LatencyMs: p95,
+            avgLatencyMs: latencies.length ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length) : null,
+            p95LatencyMs: latencies.length ? p95 : null,
             researchContextPreservation: this.calcRate(this.results.filter(r => r.category === 'research'), r => !!r.researchContextPreserved),
             faqAccuracy: this.calcRate(this.results.filter(r => r.category === 'faq'), r => r.success),
             dataQueryAccuracy: this.calcRate(this.results.filter(r => r.category === 'data_query'), r => r.success),
             helpfulRate: this.calcRate(this.results, r => r.success && r.issues.length === 0),
-            noFollowUpResolutionRate: 100,
-            safetyPassRate: this.calcRate(this.results, r => !r.agentPath.includes('blocked')),
-            evidenceCoverage: this.calcRate(this.results.filter(r => r.requiresWeb), r => r.success)
+            // Neither safety nor follow-up resolution is evaluated by this runner.
+            noFollowUpResolutionRate: null,
+            safetyPassRate: null,
+            evidenceCoverage: this.calcRate(this.results.filter(r => r.requiresWeb), r => r.evidenceCitationPresent === true)
         };
     }
     calcRate(subset, predicate) {
         if (subset.length === 0)
-            return 100;
+            return null;
         return Math.round((subset.filter(predicate).length / subset.length) * 100);
     }
     calculateStratifiedSummary() {
@@ -256,7 +300,7 @@ class BenchmarkRunner {
             metadata: {
                 runId: `bench-${Date.now()}`,
                 timestamp: new Date().toISOString(),
-                environment: this.targetUrl,
+                environment: this.config.targetUrl || this.config.provider || 'direct',
                 user: 'bench-user',
                 questionSet,
                 durationMs,
@@ -276,7 +320,7 @@ class BenchmarkRunner {
                 }))
             },
             results: this.results,
-            recommendation: kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
+            recommendation: kpis.totalTests > 0 && kpis.passedTests / kpis.totalTests >= 0.8 ? 'promote' : 'hold',
             topIssues: failedTests.slice(0, 3).map(t => `${t.testId}: ${t.issues[0]}`),
             insights: []
         };
