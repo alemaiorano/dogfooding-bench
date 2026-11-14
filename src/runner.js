@@ -96,7 +96,9 @@ INSTRUCTIONS:
         return this.generateStructuredOutput(kpis, stratified, durationMs, studies.join(','), tier);
     }
     filterQuestions(dataset, studies, tier) {
-        let all = dataset.questions || [];
+        let all = Array.isArray(dataset.questions)
+            ? dataset.questions
+            : dataset.id && (dataset.message || dataset.text) ? [dataset] : [];
         return all;
     }
     async runTest(test, index, total) {
@@ -218,6 +220,9 @@ INSTRUCTIONS:
         }
         if (responseText.length > MAX_RESPONSE_LENGTH) {
             issues.push('Response: Too long (verbosity)');
+        }
+        if (responseText.includes('[object Object]')) {
+            issues.push('Response: JSON leak detected');
         }
         const maxLatency = test.maxLatencyMs || CATEGORY_MAX_LATENCY_MS[test.category] || DEFAULT_MAX_LATENCY_MS;
         if (latencyMs > maxLatency) {

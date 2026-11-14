@@ -60,3 +60,13 @@ test('reusing a runner does not include prior runs', async () => {
   assert.equal(next.kpiSummary.totalTests,1);
   assert.equal(next.kpiSummary.evidenceCoverage,null);
 });
+
+test('JSON serialization leaks are rejected', async () => {
+  const output=await runFixture(async()=>response('[object Object]'),[question('leak',false)]);
+  assert.equal(output.results[0].success,false);
+  assert.ok(output.results[0].issues.includes('Response: JSON leak detected'));
+});
+test('a single-question object is executed rather than silently skipped', async () => {
+  const runner=new BenchmarkRunner({targetUrl:'http://localhost:1'});
+  assert.equal(runner.filterQuestions(question('single',false),[], 'smoke').length,1);
+});

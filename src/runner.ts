@@ -86,7 +86,9 @@ INSTRUCTIONS:
   }
 
   private filterQuestions(dataset: any, studies: string[], tier: string): QuestionBankTest[] {
-    let all: QuestionBankTest[] = dataset.questions || [];
+    let all: QuestionBankTest[] = Array.isArray(dataset.questions)
+      ? dataset.questions
+      : dataset.id && (dataset.message || dataset.text) ? [dataset] : [];
     return all;
   }
 
@@ -216,6 +218,10 @@ INSTRUCTIONS:
     }
     if (responseText.length > MAX_RESPONSE_LENGTH) {
       issues.push('Response: Too long (verbosity)');
+    }
+
+    if (responseText.includes('[object Object]')) {
+      issues.push('Response: JSON leak detected');
     }
 
     const maxLatency = test.maxLatencyMs || CATEGORY_MAX_LATENCY_MS[test.category] || DEFAULT_MAX_LATENCY_MS;

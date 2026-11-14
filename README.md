@@ -76,7 +76,12 @@ identified baseline artifact and has been removed pending provenance.
   safety judgment. Consumers must handle `null` as not evaluated.
 - `recommendation` remains a task-pass-rate heuristic, not the paper's multidimensional
   release gate or a production-readiness approval.
-- `npm test` builds and runs offline regression tests without model calls or keys.
+- `npm test` builds and runs offline regression and CLI/HTTP integration tests without
+  model calls or keys. These tests require Node.js and Python 3 (standard library only).
+- The CSV extractor preserves unknown gate dimensions as empty cells and emits HOLD
+  unless another measured dimension requires ROLLBACK. It never fabricates safety
+  from a successful task. Historical statistical scripts remain intended for the
+  fully measured, frozen study dataset, not new incomplete runs.
 
 This contract changes newly generated outputs only. Historical traces remain intact.
 

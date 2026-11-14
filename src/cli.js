@@ -39,15 +39,27 @@ const path = __importStar(require("path"));
 const fs = __importStar(require("fs"));
 async function main() {
     const args = process.argv.slice(2);
-    const targetUrl = args.find(a => a.startsWith('--target='))?.split('=')[1] || process.env.API_URL || 'http://localhost:3001/api/v2/chat';
-    const apiKey = args.find(a => a.startsWith('--key='))?.split('=')[1] || process.env.API_KEY || 'bench-token';
+    const targetUrl = args.find(a => a.startsWith('--target='))?.split('=')[1];
+    const apiKey = args.find(a => a.startsWith('--key='))?.split('=')[1] || process.env.API_KEY || process.env.OPENAI_API_KEY || process.env.GEMINI_API_KEY;
+    const provider = (args.find(a => a.startsWith('--provider='))?.split('=')[1] || 'custom');
+    const model = args.find(a => a.startsWith('--model='))?.split('=')[1];
     const datasetPath = args.find(a => a.startsWith('--dataset='))?.split('=')[1] || path.join(__dirname, 'dataset.json');
     const tier = args.find(a => a.startsWith('--tier='))?.split('=')[1] || 'smoke';
     if (!fs.existsSync(datasetPath)) {
         console.error(`❌ Dataset not found at: ${datasetPath}`);
         process.exit(1);
     }
-    const runner = new runner_1.BenchmarkRunner(targetUrl, apiKey);
+    if (!apiKey && provider !== 'custom') {
+        console.error(`❌ API Key is required for provider: ${provider}. Use --key or export OPENAI_API_KEY/GEMINI_API_KEY`);
+        process.exit(1);
+    }
+    const config = {
+        targetUrl: targetUrl || (provider === 'custom' ? 'http://localhost:3001/api/v2/chat' : undefined),
+        apiKey,
+        provider,
+        model
+    };
+    const runner = new runner_1.BenchmarkRunner(config);
     try {
         const output = await runner.run(datasetPath, ['v2'], tier);
         console.log('\n' + '='.repeat(60));
@@ -60,7 +72,7 @@ async function main() {
         console.log('='.repeat(60));
         const outputPath = path.join(process.cwd(), `bench-results-${Date.now()}.json`);
         fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
-        console.log(`📄 Results saved to: ${outputPath}`);
+        console.log(`📄 Detailed results saved to: ${outputPath}`);
     }
     catch (error) {
         console.error('❌ Benchmark failed:', error);

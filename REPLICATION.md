@@ -88,6 +88,11 @@ not a pooled request-level P95. Recorded safety metrics are historical operation
 signals, not independent proof of response safety. This runner correction does not
 rewrite or establish invalidity of the historical study.
 
+New runner outputs may contain null metrics. `extract_metrics.py` retains those
+runs, writes empty cells for unknown gate dimensions, and prevents PROMOTE until
+required dimensions are measured (a demonstrated ROLLBACK still takes precedence).
+Do not mix incomplete new runs into the frozen longitudinal statistical analysis.
+
 ## Citation
 
 If you use these artifacts in your research, please cite:
